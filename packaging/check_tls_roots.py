@@ -17,7 +17,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from engine.setup import download  # noqa: E402
 
 HOSTS = sorted(download.ALLOWED_HOSTS) + ['us.aws.cdn.hf.co', 'us.gcp.cdn.hf.co', 'cdn-lfs.hf.co', 'cdn-lfs-us-1.hf.co']   # *.hf.co seen on 12 Nov 2026
-OUTSIDE = 'www.digicert.com'     # a DigiCert chain: no DigiCert root is in roots.pem
+# A site whose chain ends in a root that roots.pem does not hold: it must be refused. Lastbook's own roots hold no DigiCert
+# root; a fork's (engine/distribution.py extra_roots) may, for GitHub's downloads, so the first site of a CA family that
+# roots.pem's labels do not name is used.
+OUTSIDE_CANDIDATES = [('www.digicert.com', 'DigiCert'), ('www.ssl.com', 'SSL.com'), ('www.certum.pl', 'Certum'), ('www.buypass.com', 'Buypass')]
+_LABELS = [l[1:].strip() for l in (Path(download.__file__).parent / 'roots.pem').read_text(encoding='utf-8').splitlines() if l.startswith('#')]
+OUTSIDE = next(h for h, family in OUTSIDE_CANDIDATES if not any(family in label for label in _LABELS))
 
 
 def handshake(host, ctx):
