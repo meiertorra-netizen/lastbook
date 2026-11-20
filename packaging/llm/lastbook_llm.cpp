@@ -1,7 +1,12 @@
 // lastbook-llm: runs one local language model for the Lastbook app. It talks only through its standard input and output,
 // one JSON object per line, and never opens a socket, a port or a web address. It reads one file, the model it is given.
 //
-//   lastbook-llm --model FILE [--ctx N] [--threads N] [--cpu-only] [--measure]
+//   lastbook-llm --model FILE [--draft FILE] [--draft-max N] [--ctx N] [--threads N] [--cpu-only] [--measure]
+//
+// --draft names the model's multi-token-prediction drafter (Gemma 4's "mtp-*.gguf", a few hundred MB beside the model). With it
+// the drafter proposes up to --draft-max tokens (default 3) and the model checks them in one step: the answer is the same
+// tokens the model would have written alone (each is sampled from the model and a draft is kept only while it matches), only
+// sooner. llama.cpp's common/speculative.cpp does the drafting. If the drafter cannot be loaded the model runs without it.
 //
 // On start it fits the model to this computer's memory with llama.cpp's own fitting (common/fit.cpp, the same as llama-server's
 // default --fit), prints {"ev":"fit",...} with what it measured, then loads the model and prints {"ev":"ready",...}.
@@ -19,8 +24,11 @@
 
 #include "llama.h"
 #include "ggml-backend.h"
+#include "common.h"
 #include "fit.h"
 #include "log.h"
+#include "sampling.h"
+#include "speculative.h"
 
 #include <nlohmann/json.hpp>
 
@@ -52,10 +60,8 @@
 
 using json = nlohmann::ordered_json;
 
-// log.cpp asks common.cpp whether the terminal takes colours. common.cpp is not built in (it brings the rest of llama.cpp's
-// common library with it), and this program's output is never a terminal.
-bool tty_can_use_colors() { return false; }
-bool tty_enable_ansi() { return false; }
+// common.cpp is built in for the drafting (speculative.cpp needs its batch, sampler and checkpoint helpers), without the parts of
+// llama.cpp's common library that download (arg.cpp, download.cpp, hf-cache.cpp are not built: the build checks for socket calls).
 
 static FILE * g_out = nullptr;      // the protocol: the real standard output, kept apart from anything a library prints
 static std::mutex g_out_lock;
@@ -158,6 +164,11 @@ struct Engine {
     const llama_vocab * vocab = nullptr;
     std::vector<llama_token> cached;   // the tokens the context holds, in order
     Inbox * in = nullptr;
+    // multi-token prediction (--draft): the drafter, its context (sharing the model's memory) and llama.cpp's drafting state
+    llama_model * dmodel = nullptr;
+    llama_context * dctx = nullptr;
+    common_speculative * spec = nullptr;
+    int n_draft = 3;
 };
 
 static std::vector<llama_token> tokenize(const llama_vocab * vocab, const std::string & text, bool special) {
@@ -213,6 +224,189 @@ static bool decode_all(Engine & e, const std::vector<llama_token> & toks, size_t
     return true;
 }
 
+
+// The model and its drafter (--draft): read the prompt but its last token, then repeat: the drafter proposes up to n_draft
+// tokens, the model reads the last token and the proposals in one batch, and the tokens it samples are kept up to the first
+// that differs from a proposal. This follows llama.cpp's examples/speculative-simple, with the same stops, cancel and output
+// as generate() below.
+static std::vector<std::string> stop_list(const json & req) {
+    std::vector<std::string> stops;
+    for (const auto & s : req.value("stop", json::array())) {
+        if (s.is_string()) {
+            stops.push_back(s.get<std::string>());
+        }
+    }
+    return stops;
+}
+
+static void generate_drafted(Engine & e, const json & req, const std::vector<llama_token> & toks, size_t keep, size_t reused,
+                             std::chrono::steady_clock::time_point t0) {
+    using clock = std::chrono::steady_clock;
+    const json id = req.value("id", json());
+    auto fail = [&](const char * code, const std::string & msg) {
+        send({{"ev", "error"}, {"id", id}, {"code", code}, {"msg", msg}});
+    };
+    llama_memory_t mem = llama_get_memory(e.ctx);
+    const int n_ctx = (int) llama_n_ctx(e.ctx);
+    const int n_batch = (int) llama_n_batch(e.ctx);
+    int max_tokens = std::min(std::max(1, req.value("max_tokens", 1024)), n_ctx - (int) toks.size());
+    const llama_seq_id seq = 0;
+
+    // the prompt, all but its last token, in batches the drafter also sees
+    common_batch batch(e.ctx);
+    for (size_t i = keep; i + 1 < toks.size(); i += n_batch) {
+        if (e.in->cancel) {
+            llama_memory_clear(mem, true);
+            e.cached.clear();
+            send({{"ev", "done"}, {"id", id}, {"reason", "cancel"}, {"n_prompt", toks.size()}, {"n_reused", reused}, {"n_gen", 0}});
+            return;
+        }
+        batch.clear();
+        const size_t end = std::min(toks.size() - 1, i + (size_t) n_batch);
+        for (size_t k = i; k < end; k++) {
+            batch.add(toks[k], (llama_pos) k, seq, false);
+        }
+        if (llama_process(e.ctx, LLAMA_PROCESS_TYPE_DECODE, batch.get()) != 0 || !common_speculative_process(e.spec, batch)) {
+            llama_memory_clear(mem, true);
+            e.cached.clear();
+            return fail("decode", "the model could not read the question (llama_decode failed)");
+        }
+        e.cached.insert(e.cached.end(), toks.begin() + i, toks.begin() + end);
+    }
+    const auto t1 = clock::now();
+
+    common_params_sampling sp;            // the same sampling as generate(): top-k, top-p, min-p, temperature, seed
+    sp.top_k = req.value("top_k", 64);
+    sp.top_p = req.value("top_p", 0.95f);
+    sp.min_p = req.value("min_p", 0.05f);
+    sp.temp = req.value("temp", 0.2f);
+    sp.seed = req.value("seed", (uint32_t) LLAMA_DEFAULT_SEED);
+    sp.samplers = {COMMON_SAMPLER_TYPE_TOP_K, COMMON_SAMPLER_TYPE_TOP_P, COMMON_SAMPLER_TYPE_MIN_P, COMMON_SAMPLER_TYPE_TEMPERATURE};
+    common_sampler_ptr smpl(common_sampler_init(e.model, sp));
+
+    const bool ckpt_tgt = common_context_can_seq_rm(e.ctx) == COMMON_CONTEXT_SEQ_RM_TYPE_FULL;
+    const bool ckpt_dft = common_context_can_seq_rm(e.dctx) == COMMON_CONTEXT_SEQ_RM_TYPE_FULL;
+    llama_tokens prompt(toks.begin(), toks.end() - 1);
+    llama_token last = toks.back();
+    int n_past = (int) prompt.size();
+    common_speculative_begin(e.spec, seq, prompt);
+
+    const std::vector<std::string> stops = stop_list(req);
+    std::string pending, why = "length", stopped_by;
+    int n_gen = 0, n_drafted = 0, n_accepted = 0;
+    llama_tokens draft;
+    common_prompt_checkpoint ckpt;
+    bool done = false;
+    while (!done) {
+        if (e.in->cancel) {
+            why = "cancel";
+            break;
+        }
+        if (draft.empty()) {
+            ckpt.update_pos((int64_t) prompt.size(), llama_memory_seq_pos_min(mem, seq), llama_memory_seq_pos_max(mem, seq));
+            if (ckpt_dft) {
+                ckpt.update_dft(e.dctx, seq, LLAMA_STATE_SEQ_FLAGS_PARTIAL_ONLY);
+            }
+            const int n_max = std::max(0, std::min(n_ctx - n_past - 2, max_tokens - n_gen - 1));
+            common_speculative_get_draft_params(e.spec, seq) = {true, n_max, n_past, last, &prompt, &draft};
+            if (!getenv("LBNODRAFT")) common_speculative_draft(e.spec);
+            if (!draft.empty() && ckpt_tgt) {
+                ckpt.update_tgt(e.ctx, seq, LLAMA_STATE_SEQ_FLAGS_PARTIAL_ONLY);
+            }
+            if (ckpt_dft) {
+                ckpt.load_dft(e.dctx, seq, LLAMA_STATE_SEQ_FLAGS_PARTIAL_ONLY);
+            }
+            llama_memory_seq_rm(llama_get_memory(e.dctx), seq, ckpt.pos_max + 1, -1);
+        }
+        batch.clear();
+        batch.add(last, n_past++, seq, true);
+        for (size_t i = 0; i < draft.size(); i++) {
+            batch.add(draft[i], n_past + (llama_pos) i, seq, true);
+        }
+        if (llama_process(e.ctx, LLAMA_PROCESS_TYPE_DECODE, batch.get()) != 0 || !common_speculative_process(e.spec, batch)) {
+            why = e.in->cancel ? "cancel" : "decode";
+            break;
+        }
+        common_sampler_ptr saved;
+        if (ckpt_tgt) {
+            saved.reset(common_sampler_clone(smpl.get()));
+        }
+        const size_t n_draft = draft.size();
+        auto ids = common_sampler_sample_and_accept_n(smpl.get(), e.ctx, draft);
+        if (ckpt_tgt && ids.size() - 1 < n_draft) {   // this memory cannot drop the refused proposals: back to before them
+            draft = std::move(ids);
+            ckpt.load_tgt(e.ctx, seq, LLAMA_STATE_SEQ_FLAGS_PARTIAL_ONLY);
+            llama_memory_seq_rm(mem, seq, ckpt.pos_max + 1, -1);
+            ckpt.load_dft(e.dctx, seq, LLAMA_STATE_SEQ_FLAGS_PARTIAL_ONLY);
+            llama_memory_seq_rm(llama_get_memory(e.dctx), seq, ckpt.pos_max + 1, -1);
+            prompt.resize(ckpt.n_tokens);
+            smpl = std::move(saved);
+            n_past = (int) prompt.size();
+            continue;
+        }
+        if (getenv("LBDEBUG") && n_gen < 12) {
+            fprintf(stderr, "DBG n_past=%d last=%d draft=[", n_past, last);
+            for (auto t : draft) fprintf(stderr, "%d ", t);
+            fprintf(stderr, "] ids=[");
+            for (auto t : ids) fprintf(stderr, "%d '%s' ", t, piece(e.vocab, t).c_str());
+            fprintf(stderr, "] ckpt_tgt=%d ckpt_dft=%d\n", (int) ckpt_tgt, (int) ckpt_dft);
+        }
+        common_speculative_accept(e.spec, seq, (uint16_t) (ids.size() - 1));
+        n_past += (int) ids.size() - 1;
+        n_drafted += (int) n_draft;
+        n_accepted += (int) ids.size() - 1;
+        for (size_t i = 0; i < ids.size(); i++) {
+            prompt.push_back(last);
+            last = ids[i];
+            if (llama_vocab_is_eog(e.vocab, last)) {
+                why = "eog";
+                done = true;
+                break;
+            }
+            std::string p = piece(e.vocab, last);
+            if (std::find(stops.begin(), stops.end(), p) != stops.end()) {
+                why = "stop";
+                stopped_by = p;
+                done = true;
+                break;
+            }
+            pending += p;
+            size_t ok = complete_utf8(pending);
+            if (ok) {
+                send({{"ev", "tok"}, {"id", id}, {"t", pending.substr(0, ok)}});
+                pending.erase(0, ok);
+            }
+            if (++n_gen >= max_tokens) {
+                why = "length";
+                done = true;
+                break;
+            }
+        }
+        draft.clear();
+        llama_memory_seq_rm(mem, seq, n_past, -1);
+        llama_memory_seq_rm(llama_get_memory(e.dctx), seq, n_past, -1);
+    }
+    if (!pending.empty()) {
+        send({{"ev", "tok"}, {"id", id}, {"t", pending}});
+    }
+    // What the memory holds now is the prompt and the accepted tokens before the last one: the next request reuses it.
+    llama_memory_seq_rm(mem, seq, (llama_pos) prompt.size(), -1);
+    e.cached.assign(prompt.begin(), prompt.end());
+    if (why == "decode") {
+        llama_memory_clear(mem, true);
+        e.cached.clear();
+        return fail("decode", "the model stopped while writing (llama_decode failed)");
+    }
+    const auto t2 = clock::now();
+    auto ms = [](auto a, auto b) { return (long long) std::chrono::duration_cast<std::chrono::milliseconds>(b - a).count(); };
+    json out = {{"ev", "done"}, {"id", id}, {"reason", why}, {"n_prompt", toks.size()}, {"n_reused", reused}, {"n_gen", n_gen},
+                {"n_drafted", n_drafted}, {"n_accepted", n_accepted}, {"prompt_ms", ms(t0, t1)}, {"gen_ms", ms(t1, t2)}};
+    if (!stopped_by.empty()) {
+        out["stop"] = stopped_by;
+    }
+    send(out);
+}
+
 static void generate(Engine & e, const json & req) {
     using clock = std::chrono::steady_clock;
     const auto t0 = clock::now();
@@ -246,6 +440,9 @@ static void generate(Engine & e, const json & req) {
     if (keep == toks.size()) {
         keep--;                            // the last prompt token is decoded again, for its logits
     }
+    if (e.spec && toks.size() >= 2 && keep > toks.size() - 2) {
+        keep = toks.size() - 2;            // drafting: at least one token is read here, so the drafter has the state it ends on
+    }
     llama_memory_t mem = llama_get_memory(e.ctx);
     if (keep < e.cached.size()) {
         if (!llama_memory_seq_rm(mem, 0, (llama_pos) keep, -1)) {
@@ -257,6 +454,9 @@ static void generate(Engine & e, const json & req) {
     const size_t reused = keep;
 
     e.in->cancel = false;
+    if (e.spec && toks.size() >= 2) {
+        return generate_drafted(e, req, toks, keep, reused, t0);
+    }
     int err = 0;
     if (!decode_all(e, toks, keep, err)) {
         llama_memory_clear(mem, true);
@@ -389,13 +589,17 @@ int main(int argc, char ** argv) {
     dup2(2, 1);
     g_out = fdopen(proto, "w");
 #endif
-    std::string path;
-    int n_ctx = 16384, threads = 0;
+    std::string path, draft_path;
+    int n_ctx = 16384, threads = 0, n_draft = 3;
     bool cpu_only = false, measure = false;
     for (int i = 1; i < argc; i++) {
         std::string a = argv[i];
         if (a == "--model" && i + 1 < argc) {
             path = argv[++i];
+        } else if (a == "--draft" && i + 1 < argc) {
+            draft_path = argv[++i];
+        } else if (a == "--draft-max" && i + 1 < argc) {
+            n_draft = std::max(1, std::min(16, std::atoi(argv[++i])));
         } else if (a == "--ctx" && i + 1 < argc) {
             n_ctx = std::atoi(argv[++i]);
         } else if (a == "--threads" && i + 1 < argc) {
@@ -432,6 +636,11 @@ int main(int argc, char ** argv) {
     cp.abort_callback_data = &in;
     cp.no_perf = true;
     cp.swa_full = false;   // as llama-server runs it: the sliding-window layers keep only their window, not the whole context
+    if (!draft_path.empty()) {   // checking proposals reads several outputs per step (common_speculative_get_output_limits)
+        const auto lim = common_speculative_get_output_limits((int32_t) cp.n_batch, 1, n_draft);
+        cp.n_outputs_max = (uint32_t) lim.total;
+        cp.n_outputs_max_per_seq = (uint32_t) lim.per_seq;
+    }
     static ggml_backend_dev_t no_devices[1] = { nullptr };
     if (cpu_only) {
         mp.devices = no_devices;
@@ -495,11 +704,50 @@ int main(int argc, char ** argv) {
         return 5;
     }
     e.vocab = llama_model_get_vocab(e.model);
+    json draft_info = nullptr;
+    if (!draft_path.empty()) {
+        // As common_speculative_init_result does for an MTP drafter: its own small model, a context of the MTP kind tied to the
+        // model's (Gemma 4's drafter reads the model's memory), as long as the model's. Kept on the same devices as the model.
+        llama_model_params dmp = llama_model_default_params();
+        if (cpu_only) {
+            dmp.devices = no_devices;
+            dmp.n_gpu_layers = 0;
+        }
+        e.dmodel = llama_model_load_from_file(draft_path.c_str(), dmp);
+        llama_context_params dcp = cp;
+        dcp.ctx_type = LLAMA_CONTEXT_TYPE_MTP;
+        dcp.n_ctx = llama_n_ctx(e.ctx);
+        dcp.n_rs_seq = 0;
+        dcp.ctx_other = e.ctx;
+        dcp.n_outputs_max = 1;
+        dcp.n_outputs_max_per_seq = 1;
+        e.dctx = e.dmodel ? llama_init_from_model(e.dmodel, dcp) : nullptr;
+        if (e.dctx) {
+            common_params_speculative sp;
+            sp.types = {COMMON_SPECULATIVE_TYPE_DRAFT_MTP};
+            sp.draft.n_max = n_draft;
+            sp.draft.ctx_tgt = e.ctx;
+            sp.draft.ctx_dft = e.dctx;
+            e.spec = common_speculative_init(sp, 1);
+            e.n_draft = n_draft;
+        }
+        if (!e.spec) {     // the model alone, as without --draft
+            if (e.dctx) {
+                llama_free(e.dctx);
+                e.dctx = nullptr;
+            }
+            if (e.dmodel) {
+                llama_model_free(e.dmodel);
+                e.dmodel = nullptr;
+            }
+        }
+        draft_info = {{"used", e.spec != nullptr}, {"n_max", n_draft}};
+    }
     char desc[256] = {0};
     llama_model_desc(e.model, desc, sizeof(desc));
     send({{"ev", "ready"}, {"n_ctx", llama_n_ctx(e.ctx)}, {"desc", desc}, {"threads", llama_n_threads(e.ctx)},
           {"load_ms", (long long) std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - t_load).count()},
-          {"ram_free", ram_free()}});
+          {"ram_free", ram_free()}, {"draft", draft_info}});
 
     while (true) {
         json req;
@@ -521,6 +769,15 @@ int main(int argc, char ** argv) {
         } else {
             send({{"ev", "error"}, {"code", "bad_request"}, {"msg", "unknown op"}});
         }
+    }
+    if (e.spec) {
+        common_speculative_free(e.spec);
+    }
+    if (e.dctx) {
+        llama_free(e.dctx);
+    }
+    if (e.dmodel) {
+        llama_model_free(e.dmodel);
     }
     llama_free(e.ctx);
     llama_model_free(e.model);
