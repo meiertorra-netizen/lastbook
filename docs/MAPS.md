@@ -126,6 +126,45 @@ as one map.
 
 [REGIONS-MX.md](REGIONS-MX.md) does the same for Mexico's 32 states (entidades federativas).
 
+## Building a map outside the US: Catalonia (`ES-CT`) as the first one
+
+A region outside the US is built from sources that cover all of Europe, so the same steps work for any region whose
+OpenStreetMap extract exists. Catalonia was built and checked this way on 20 November 2026 (about 6 minutes on 4 cores;
+a 340 MB map zip and a 63 MB address zip, 905 MB installed).
+
+| Step | Tool | Source | Licence |
+|---|---|---|---|
+| Streets, rail, water, land, places, help points, the sea; building outlines with heights; the place finder | `tools/build_osm_region.py` | An OpenStreetMap `.osm.pbf` extract, e.g. `download.openstreetmap.fr/extracts/europe/spain/catalunya.osm.pbf` (Geofabrik's free GeoPackage, which `build_map.py` reads, is not needed) | ODbL 1.0 |
+| Elevation | `tools/build_terrain.py --src --out --source` | Copernicus DEM GLO-30 tiles, public bucket `copernicus-dem-30m.s3.amazonaws.com`, worldwide | Copernicus DEM licence (free, attribution) |
+| Street addresses (Spain) | `tools/build_addresses_es.py CT` | Overture Maps' address theme, Spanish rows (scne.es), cut by the region's province postcode prefixes | CC BY 4.0 |
+| Credits, `map-set.json`, the two zips | `tools/finish_region_map.py OUT ES-CT --title Catalonia --credit … --zip DIR` | | |
+
+```bash
+python tools/build_osm_region.py catalunya.osm.pbf out/ES-CT --name Catalonia --credit "OpenStreetMap contributors, … (ODbL 1.0)"
+python tools/build_terrain.py --src dem/ --out out/ES-CT/derived/geo/terrain.sqlite --bbox 0.0,40.37,3.49,43.02 --source "Copernicus DEM GLO-30 …"
+python tools/build_addresses_es.py CT out/ES-CT
+python tools/finish_region_map.py out/ES-CT ES-CT --title Catalonia --credit "© OpenStreetMap contributors · Copernicus DEM … · Addresses: scne.es (CC BY 4.0) via Overture Maps" --zip zips/
+```
+
+What the app does with such a map, and what changed for it:
+
+- The region's detail goes in `national.sqlite` (as a state map's does); `map.sqlite` is empty. The map opens on the
+  region by itself, because `map_contents` takes its box from the help points.
+- The page paints the whole view as sea and then a coarse world outline as land. A region therefore also carries its
+  own land polygon (`island`, class `mainland`) on the land side of the coastline, and both it and the sea are cut into
+  pieces of a few thousand points, so that a tile clips only the coast near it.
+- `national.sqlite`'s meta can hold `credit`, `data_as_of` and `datasets`; `server.py` (`region_meta`) passes them to
+  `web/map.js`, which shows them instead of the US credit line, the US data date and the US source list. US maps carry
+  none of these keys and look as before.
+- Spanish address search (`engine/address_search.py`, `find_es_addresses`) reads indexes named `ES-<region>.sqlite`:
+  the street before the number, Catalan and Spanish street types and their abbreviations, accents, articles moved to
+  the end by the cadastre, a letter after the number, the town or postcode after it. As for the US, it returns an exact
+  house number or nothing. A query that finds no address goes on to the place finder.
+- Setup accepts address index ids such as `ES-CT` (`manifest.py`), and carries them over on an upgrade (`install.py`).
+
+Not done yet: dams and reservoirs (`water.sqlite`, e.g. MITECO's inventory, see REGIONS-ES.md), crops, kilometres in
+the distance and scale labels and metres in the contour labels, and "Select a state" wording in setup.
+
 ## Checking a map change
 
 - A change to a layer in `web/map.js` is a change you can see: include screenshots in light and dark mode.

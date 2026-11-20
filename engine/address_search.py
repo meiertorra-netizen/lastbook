@@ -2,6 +2,7 @@
 import math
 import re
 import sqlite3
+import unicodedata
 from pathlib import Path
 
 from engine.paths import ro_uri
@@ -171,3 +172,160 @@ def _lookup(number, words, state, postcode, town, geo_directory, limit, near):
     finally:
         for connection in connections:
             connection.close()
+
+
+# ---- Spain (and other countries that write the street before the number) ------------------------------------------
+# Indexes named ES-<region>.sqlite are built by tools/build_addresses_es.py from Overture's Spanish rows (scne.es, CC BY 4.0).
+# Their street names come as "CALLE CUEVAS LAS" or "AVINGUDA D'EMPURIES": a street type first, sometimes in Catalan,
+# Galician or Basque, and articles moved to the end. People type "C/ de les Coves 12, Girona" or "Avda. Diagonal 640".
+# Both sides are reduced to the words that name the street ("coves", "empuries", "diagonal"), so the type, the articles
+# and the accents never decide a match; the house number, the town and the postcode still must.
+ES_TYPES = set("""
+calle c cl c/ carrer carrero calleja callejon carreron av avda avd avenida avinguda av. avgda avgda. plaza pza pl placa plaça
+paseo passeig pg ps pso camino cami cm ctra carretera ronda rda rambla rbla travesia travessia trav travessera pasaje passatge
+ptge psje via urbanizacion urb diseminados partida sector lugar barrio barri grupo raval veinat masias glorieta gta costa
+carreró baixada bajada pujada subida cuesta
+""".split())
+ES_SMALL = set("de del dels d l la las los les el els en na sa ses s i y a al".split())
+# The same kind of street in Spanish, Catalan and the usual abbreviations, so "Passeig de Gràcia" prefers "PASEO GRACIA"
+# to "TRAVESSERA GRACIA", and "Rambla de Catalunya" prefers "RAMBLA CATALUNYA" to "AVINGUDA CATALUNYA".
+ES_KIND = {w: kind for kind, words in {
+    'calle': 'calle c cl carrer carrero calleja callejon carreron', 'avenida': 'av avda avd avenida avinguda avgda',
+    'plaza': 'plaza pza pl placa', 'paseo': 'paseo passeig pg ps pso', 'camino': 'camino cami cm',
+    'carretera': 'ctra carretera', 'ronda': 'ronda rda', 'rambla': 'rambla rbla', 'travesia': 'travesia travessia trav',
+    'travessera': 'travessera', 'pasaje': 'pasaje passatge ptge psje', 'via': 'via', 'urbanizacion': 'urbanizacion urb',
+    'glorieta': 'glorieta gta', 'baixada': 'baixada bajada', 'pujada': 'pujada subida cuesta costa'}.items()
+    for w in words.split()}
+
+
+def es_kind(street):
+    """'Passeig de Gràcia' -> 'paseo'; '' when the street names no type."""
+    words = fold(street).split()
+    return ES_KIND.get(words[0], '') if len(words) > 1 else ''
+
+
+def fold(text):
+    """Lower case without accents: 'Plaça de l'Àngel' -> 'placa de l angel'. 'l·l' becomes 'll', 'ñ' 'n', 'ç' 'c'."""
+    text = unicodedata.normalize('NFKD', text.lower().replace('l·l', 'll').replace('l.l', 'll'))
+    return re.sub(r'[^a-z0-9 ]+', ' ', ''.join(c for c in text if not unicodedata.combining(c))).strip()
+
+
+def es_norm(street):
+    """The words that name a Spanish street, in order: 'CALLE CUEVAS LAS' and 'C/ de les Coves' -> 'cuevas', 'coves'."""
+    words = fold(street).split()
+    while len(words) > 1 and words[0] in ES_TYPES:
+        words = words[1:]
+    kept = [w for w in words if w not in ES_SMALL]
+    return ' '.join(kept or words)
+
+
+def es_display(street):
+    """'CALLE CUEVAS LAS' -> 'Calle Las Cuevas': title case, and the article Overture moved to the end put back."""
+    words = street.replace(',', ' ').split()
+    if len(words) > 2 and fold(words[-1]) in {'el', 'la', 'las', 'los', 'les', 'els'}:
+        words = [words[0], words[-1]] + words[1:-1]
+    return ' '.join(w.capitalize() if not re.match(r"^[a-zà-ÿ]'", w, re.I) else w[:2].lower() + w[2:].capitalize()
+                    for w in words)
+
+
+def es_indexes(geo_directory):
+    return sorted((Path(geo_directory) / 'addresses').glob('ES-*.sqlite'))
+
+
+ES_NUMBER = re.compile(r'(\d{1,5})\s*([a-z])?$')
+
+
+def es_parse(query):
+    """(number, street words, town words, postcode) for 'Carrer de Mallorca 401, Barcelona 08013', or None.
+    The number may also come first ('401 Carrer de Mallorca')."""
+    tokens = fold(query.replace(',', ' , ')).split()
+    postcode = ''
+    for i, t in enumerate(tokens):
+        if re.fullmatch(r'[0-5]\d{4}', t):
+            postcode = tokens.pop(i)
+            break
+    words = [t for t in tokens]
+    if words and re.fullmatch(r'\d{1,5}[a-z]?', words[0]) and len(words) > 1:
+        m = re.fullmatch(r'(\d{1,5})([a-z])?', words[0])
+        street, town = words[1:], []
+    else:
+        at = next((i for i, t in enumerate(words) if i > 0 and re.fullmatch(r'\d{1,5}[a-z]?', t)), None)
+        if at is None:
+            return None
+        m = re.fullmatch(r'(\d{1,5})([a-z])?', words[at])
+        street, town = words[:at], words[at + 1:]
+        if town and len(town[0]) == 1 and town[0].isalpha() and town[0] not in ES_SMALL:   # '12 b'
+            m = re.fullmatch(r'(\d{1,5})([a-z])?', m[1] + town[0])
+            town = town[1:]
+    number = m[1] + (m[2] or '').upper()
+    street = [w for w in street if w != ',']
+    town = [w for w in town if w not in (',', 'bis')]
+    return number, street, town, postcode
+
+
+def is_es_address_query(query, geo_directory):
+    return bool(es_indexes(geo_directory)) and es_parse(query) is not None and bool(es_parse(query)[1])
+
+
+def find_es_addresses(query, geo_directory, limit=8, near=None):
+    """Exact house numbers from the installed Spanish indexes; never a guessed house. [] when nothing matches."""
+    parsed = es_parse(query)
+    if not parsed:
+        return []
+    number, street_words, town_words, postcode = parsed
+    # Town words can also end the street ("Carrer Gran de Gracia 12" has none; "Mallorca 401 Barcelona" has one):
+    # try the whole street first, then let trailing words stand for the town only when no town was typed after the number.
+    readings = [(street_words, town_words)]
+    if not town_words:
+        readings += [(street_words[:k], street_words[k:]) for k in range(len(street_words) - 1, 0, -1)]
+    results = []
+    for path in es_indexes(geo_directory):
+        try:
+            db = sqlite3.connect(ro_uri(path), uri=True)
+        except sqlite3.Error:
+            continue
+        try:
+            for street, town in readings:
+                norm = es_norm(' '.join(street))
+                if not norm or norm in ES_TYPES:
+                    continue
+                town_norm = fold(' '.join(town))
+                conditions = ['norm >= ?', 'norm < ?', '(num = ? OR num GLOB ?)']
+                parameters = [norm, norm + '\uffff', number, number + '[A-Z]' if number[-1].isdigit() else number]
+                if postcode:
+                    conditions.append('zip = ?')
+                    parameters.append(postcode)
+                rows = db.execute('SELECT num,street,city,state,zip,lat,lon,norm,cityf FROM addr WHERE ' + ' AND '.join(conditions)
+                                  + ' ORDER BY length(norm),norm LIMIT 400', parameters).fetchall()
+                if town_norm:
+                    rows = [r for r in rows if r[8] == town_norm or r[8].startswith(town_norm + ' ')
+                            or (' ' + town_norm + ' ') in (' ' + r[8] + ' ') or r[8].startswith(town_norm)]
+                exact = [r for r in rows if r[7] == norm]
+                rows = exact or rows
+                kind = es_kind(' '.join(street))
+                same = [r for r in rows if es_kind(r[1]) == kind] if kind else []
+                rows = same or rows
+                if rows:
+                    results += rows
+                    break
+        except sqlite3.Error:
+            pass
+        finally:
+            db.close()
+    def rank(r):
+        d = 0
+        if near:
+            d = (r[5] - near[0]) ** 2 + ((r[6] - near[1]) * math.cos(math.radians(near[0]))) ** 2
+        return r[0] != number, len(r[7]), d
+    out, seen = [], set()
+    for num, street, city, region, zip_code, lat, lon, norm, _ in sorted(results, key=rank):
+        key = (num, norm, round(lat, 5), round(lon, 5))
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append({'name': f'{es_display(street)} {num}', 'kind': 'Street address',
+                    'detail': ', '.join(part for part in (f'{zip_code} {city}'.strip(), region) if part),
+                    'lat': lat, 'lon': lon, 'source': 'Overture Maps (scne.es)', 'onMap': True})
+        if len(out) == limit:
+            break
+    return out

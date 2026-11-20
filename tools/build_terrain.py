@@ -3,6 +3,8 @@
   derived/buildenv/bin/python tools/build_terrain.py [--bbox W,S,E,N] [--workers N]
 
 Source: USGS 3DEP 1 arc-second (~30 m) GeoTIFFs in library-data/geography/usgs/Elevation/1/TIFF/current.
+Outside the US: --src DIR of Copernicus GLO-30 tiles (Copernicus_DSM_COG_10_N41_00_E002_00_DEM.tif, ~30 m, from the
+public bucket copernicus-dem-30m.s3.amazonaws.com), with --out and --source naming the output and its credit.
 Tiles are 256 px web-mercator PNGs, zoom 5-12, in the "terrain-RGB" encoding
 (height_m = -10000 + (R*65536 + G*256 + B) * 0.1). Open ocean (no source data) has no tile.
 """
@@ -17,8 +19,10 @@ warnings.filterwarnings("ignore", "Mean of empty slice")
 import tifffile
 
 HERE = Path(__file__).resolve().parent.parent
-SRC = HERE / 'library-data/geography/usgs/Elevation/1/TIFF/current'
+SRC = Path(os.environ.get('TERRAIN_SRC') or HERE / 'library-data/geography/usgs/Elevation/1/TIFF/current')
 OUT = HERE / 'derived/geo/terrain.sqlite'
+SOURCE = 'USGS 3DEP 1 arc-second DEM (library-data/geography/usgs/Elevation/1)'
+COPERNICUS = re.compile(r'Copernicus_DSM_COG_\d+_([NS])(\d+)_00_([EW])(\d+)_00_DEM\.tif')
 MAXZ, SUPERZ, MINZ = 12, 8, 4
 SPAN = 2 ** (MAXZ - SUPERZ)          # z12 tiles per z8 supertile edge (16)
 PX = 256 * SPAN                      # 4096 px
@@ -28,6 +32,10 @@ def cells():
     """(top latitude, left longitude) -> GeoTIFF path for every 1° source cell."""
     out = {}
     for d in SRC.iterdir():
+        m = COPERNICUS.fullmatch(d.name)
+        if m:   # named by its south-west corner
+            out[(int(m[2]) * (1 if m[1] == 'N' else -1) + 1, int(m[4]) * (1 if m[3] == 'E' else -1))] = d
+            continue
         m = re.fullmatch(r'([ns])(\d+)([ew])(\d+)', d.name)
         if not m:
             continue
@@ -121,8 +129,10 @@ def supertile(args):
     return out, H
 
 
-def init():
-    global CELLS
+def init(src=None):
+    global CELLS, SRC
+    if src:
+        SRC = Path(src)
     CELLS = cells()
 
 
@@ -130,8 +140,16 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--bbox', help='W,S,E,N limit (default: everything)')
     ap.add_argument('--workers', type=int, default=24)
+    ap.add_argument('--src', help='folder of source GeoTIFFs (default: the USGS 3DEP folder)')
+    ap.add_argument('--out', help='output database (default: derived/geo/terrain.sqlite)')
+    ap.add_argument('--source', help='credit stored in meta (default: USGS 3DEP)')
     a = ap.parse_args()
-    init()
+    global OUT
+    if a.src:
+        os.environ['TERRAIN_SRC'] = str(Path(a.src).resolve())   # the workers read it at import
+    if a.out:
+        OUT = Path(a.out)
+    init(a.src)
     keys = set()
     for top, left in CELLS:
         if a.bbox:
@@ -184,7 +202,7 @@ def main():
             db.execute('INSERT OR REPLACE INTO tile VALUES (?,?,?,?)', (z, x, y, png(h)))
         level = nxt
     db.execute('INSERT OR REPLACE INTO meta VALUES (?,?)', ('built', time.strftime('%Y-%m-%dT%H:%M:%S')))
-    db.execute('INSERT OR REPLACE INTO meta VALUES (?,?)', ('source', 'USGS 3DEP 1 arc-second DEM (library-data/geography/usgs/Elevation/1)'))
+    db.execute('INSERT OR REPLACE INTO meta VALUES (?,?)', ('source', a.source or SOURCE))
     db.commit()
     print(f'done: {done} supertiles, {ntiles:,} tiles in {time.time() - t0:.0f}s', flush=True)
 

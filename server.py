@@ -1388,7 +1388,12 @@ def water_places(q, limit=10, near=None):
 
 
 def places(q, limit=20, near=None):
-    if address_search.is_address_query(q):
+    geo = HERE / 'derived' / 'geo'
+    if address_search.is_es_address_query(q, geo):    # 'Carrer de Mallorca 401': a Spanish map is installed
+        found = address_search.find_es_addresses(q, geo, limit=min(limit, 8), near=near)
+        if found or not PLACEDB.exists():
+            return found
+    elif address_search.is_address_query(q):
         return address_search.find_addresses(q, HERE / 'derived' / 'geo', limit=min(limit, 8), near=near)
     if not PLACEDB.exists():
         return []
@@ -1614,7 +1619,34 @@ def map_info():
     if pack:
         extra.update(map_contents())
         geo = pack_datasets(extra)
+    region = region_meta()      # a map built outside the US names its own sources (tools/build_osm_region.py)
+    if region.get('datasets'):
+        geo = region['datasets']
+    for key in ('credit', 'data_as_of'):
+        if region.get(key):
+            extra[key] = region[key]
     return {**extra, 'meta': meta, 'datasets': geo, 'national': {k: v for k, v in national_status().items() if k not in ('source', 'database')}, 'version': data_version(), 'aerial_detail': detail, 'aerial_rev': rev, 'terrain_circle': tdetail}
+
+
+def region_meta():
+    """'credit', 'data_as_of' and 'datasets' from national.sqlite's meta, for a map set that brings its own (outside
+    the US); {} for the US maps, whose credits stay those written in web/map.js and pack_datasets."""
+    path = HERE / 'derived/geo/national.sqlite'
+    try:
+        db = sqlite3.connect(ro_uri(path), uri=True)
+        try:
+            meta = dict(db.execute("SELECT key,value FROM meta WHERE key IN ('credit','data_as_of','datasets')").fetchall())
+        finally:
+            db.close()
+    except sqlite3.Error:
+        return {}
+    if 'credit' not in meta:
+        return {}
+    try:
+        meta['datasets'] = json.loads(meta['datasets']) if meta.get('datasets') else None
+    except ValueError:
+        meta['datasets'] = None
+    return meta
 
 
 def pack_datasets(have):

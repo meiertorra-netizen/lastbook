@@ -192,6 +192,12 @@ const MapView = (() => {
   // What this map really holds, when the server says (an older one sends none of this, and everything stays offered).
   function describe(info) {
     if (info.aerial === false) { st.noAerial = true; st.style.aerial = false; $('map-photo')?.remove() }
+    // A map built outside the US brings its own credit line and the date its data was taken (tools/build_osm_region.py).
+    if (info.credit) { const a = document.querySelector('.mapattr'); if (a) a.textContent = info.credit }
+    if (info.data_as_of) {
+      const d = new Date(info.data_as_of), p = document.querySelector('.maphead p');
+      if (p && !isNaN(d)) p.textContent = p.textContent.replace(/mapped by [^—]+—/, `mapped by ${d.getUTCDate()} ${d.toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' })} ${d.getUTCFullYear()} —`);
+    }
     st.noContours = info.contours === false;
     if (!info.layers) return;
     st.have = new Set(info.layers); st.bounds = info.bounds;

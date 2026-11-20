@@ -69,7 +69,7 @@ def validate(m, allowed=None):
         for x in m.get(key) or []:
             if not isinstance(x, dict) or not isinstance(x.get('id'), str) or not NAME.match(x['id']):
                 return None
-            if key == 'address_indexes' and not re.fullmatch(r'[A-Z]{2}', x['id']):
+            if key == 'address_indexes' and not re.fullmatch(r'[A-Z]{2}(-[A-Z0-9]{1,3})?', x['id']):   # 'CA', or 'ES-CT' (ISO 3166-2)
                 return None
             files = []
             for f in x.get('files') or []:
