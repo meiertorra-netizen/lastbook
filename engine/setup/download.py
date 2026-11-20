@@ -33,11 +33,13 @@ import weakref
 import urllib.parse
 from pathlib import Path
 
+from engine import distribution   # noqa: E402  (a fork's own download site: engine/distribution.py)
+
 ALLOWED_HOSTS = frozenset({
     'downloads.lastbook.org',
     'huggingface.co',
     'cas-bridge.xethub.hf.co',
-})
+}) | distribution.LIBRARY_HOSTS | distribution.MODEL_HOSTS | ({distribution.UPDATE_HOST} - {None})
 ALLOWED_SUFFIXES = ('.hf.co',)      # Hugging Face's download hosts (cas-bridge.xethub.hf.co and its siblings)
 MAX_REDIRECTS = 5
 TIMEOUT = 30                        # seconds without a byte before the connection counts as broken

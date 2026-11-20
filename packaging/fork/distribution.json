@@ -1,0 +1,12 @@
+{
+ "app_name": "Lastbook Fork",
+ "bundle_id": "io.github.txus.lastbook",
+ "website": "github.com/txus/lastbook",
+ "manifest_url": "https://github.com/txus/lastbook/releases/download/maps/manifest-v1.json",
+ "update_url": "https://github.com/txus/lastbook/releases/latest/download/app-v1.json",
+ "library_hosts": ["downloads.lastbook.org", "github.com", "release-assets.githubusercontent.com", "objects.githubusercontent.com"],
+ "model_hosts": ["huggingface.co"],
+ "extra_roots": ["USERTrust RSA Certification Authority", "USERTrust ECC Certification Authority",
+                 "Sectigo Public Server Authentication Root R46", "Sectigo Public Server Authentication Root E46",
+                 "DigiCert Global Root G2", "DigiCert Global Root G3"]
+}

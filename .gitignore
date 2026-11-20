@@ -20,3 +20,4 @@ build/
 *.exe
 *.zip
 /app/webview2/
+/distribution.json

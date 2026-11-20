@@ -10,6 +10,10 @@ from PyInstaller.utils.hooks import collect_all, collect_submodules
 
 ROOT = Path(SPECPATH).parent
 APP = ROOT / 'app'
+import sys
+sys.path.insert(0, str(ROOT))
+from engine import distribution   # who publishes this build: Lastbook, or a fork's own name, id and download site
+NAME = distribution.APP_NAME
 
 
 SHIP = Path(os.environ['LASTBOOK_SHIP'])   # web/ and content/ as packaged: written by ship_app_files.py, never the source folders
@@ -41,6 +45,8 @@ datas += [(str(LLM / 'LICENSE-llama.cpp.txt'), 'llm')]
 datas += [(str(SHIP / 'setup' / 'manifest-v1.json'), 'setup')]   # what first-run setup can install
 hidden += collect_submodules('engine.setup')
 datas += [(str(ROOT / 'engine' / 'setup' / 'roots.pem'), 'engine/setup')]   # the only roots setup's downloader trusts
+if (ROOT / 'distribution.json').exists():   # a fork's build: engine/distribution.py reads it beside the engine
+    datas += [(str(ROOT / 'distribution.json'), '.')]
 for package in ('libzim', 'pypdfium2', 'pypdfium2_raw'):   # loaded only when a ZIM or PDF is first opened, and they carry native libraries
     d, b, h = collect_all(package)
     datas += d
@@ -62,11 +68,11 @@ EXCLUDES = [
 a = Analysis([str(APP / 'main.py')], pathex=[str(clean_sysconfig()), str(APP), str(ROOT)], binaries=binaries, datas=datas, hiddenimports=hidden, excludes=EXCLUDES, noarchive=False)
 pyz = PYZ(a.pure)
 exe = EXE(pyz, a.scripts, [('X utf8', None, 'OPTION')], exclude_binaries=True, name='Lastbook', console=False, argv_emulation=False, target_arch='arm64', codesign_identity=None, entitlements_file=None)
-coll = COLLECT(exe, a.binaries, a.datas, name='Lastbook')
+coll = COLLECT(exe, a.binaries, a.datas, name=NAME)
 ICON = Path(SPECPATH) / 'Lastbook.icns'
-app = BUNDLE(coll, name='Lastbook.app', icon=str(ICON) if ICON.exists() else None, bundle_identifier='local.lastbook.desktop', version='1.1.13', info_plist={
-    'CFBundleDisplayName': 'Lastbook',
-    'CFBundleName': 'Lastbook',
+app = BUNDLE(coll, name=f'{NAME}.app', icon=str(ICON) if ICON.exists() else None, bundle_identifier=distribution.BUNDLE_ID, version='1.1.13', info_plist={
+    'CFBundleDisplayName': NAME,
+    'CFBundleName': NAME,
     'LSApplicationCategoryType': 'public.app-category.reference',
     'LSMinimumSystemVersion': '14.0',   # what numpy's binaries ask for
     'LSRequiresNativeExecution': True,

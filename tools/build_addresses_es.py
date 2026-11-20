@@ -34,8 +34,9 @@ def main():
     ap.add_argument('out', help='map set folder; the index goes to OUT/derived/geo/addresses/')
     ap.add_argument('--release', default='2026-11-18.0')
     ap.add_argument('--parquet', help='a local Parquet file with the Overture columns, instead of S3')
+    ap.add_argument('--code', help='the index name (the map id), default ES-<region>, e.g. ES-catalunya from tools/regions')
     a = ap.parse_args()
-    code = f'ES-{a.region}'
+    code = a.code or f'ES-{a.region}'
     prefixes = ', '.join(f"'{p}'" for p in REGIONS[a.region])
     t0 = time.time()
     c = duckdb.connect()
@@ -43,7 +44,11 @@ def main():
         src = f"read_parquet('{a.parquet}')"
         cols = 'number, street, postcode, muni, unit, lat, lon'
     else:
-        c.execute("LOAD httpfs; SET s3_region='us-west-2';")
+        try:
+            c.execute('LOAD httpfs')
+        except duckdb.Error:          # a fresh machine (GitHub Actions): fetch DuckDB's own extension first
+            c.execute('INSTALL httpfs; LOAD httpfs')
+        c.execute("SET s3_region='us-west-2';")
         src = (f"read_parquet('s3://overturemaps-us-west-2/release/{a.release}/theme=addresses/type=address/*', hive_partitioning=1) "
                "WHERE country = 'ES'")
         cols = 'number, street, postcode, address_levels[1].value AS muni, unit, bbox.ymin AS lat, bbox.xmin AS lon'

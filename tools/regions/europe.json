@@ -1,0 +1,4501 @@
+{
+ "source": "osmfr",
+ "regions": [
+  {
+   "id": "AD",
+   "country": "AD",
+   "country_name": "Andorra",
+   "name": "Andorra",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/andorra.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/andorra.poly",
+   "bbox": [
+    1.404,
+    42.425,
+    1.791,
+    42.66
+   ],
+   "area_km2": 514,
+   "source": "osmfr"
+  },
+  {
+   "id": "AT-burgenland",
+   "country": "AT",
+   "country_name": "Austria",
+   "name": "Burgenland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/austria/burgenland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/austria/burgenland.poly",
+   "bbox": [
+    15.975,
+    46.81,
+    17.18,
+    48.14
+   ],
+   "area_km2": 5029,
+   "source": "osmfr"
+  },
+  {
+   "id": "AT-karnten",
+   "country": "AT",
+   "country_name": "Austria",
+   "name": "Karnten",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/austria/karnten.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/austria/karnten.poly",
+   "bbox": [
+    12.635,
+    46.35,
+    15.085,
+    47.15
+   ],
+   "area_km2": 10721,
+   "source": "osmfr"
+  },
+  {
+   "id": "AT-niederosterreich",
+   "country": "AT",
+   "country_name": "Austria",
+   "name": "Niederosterreich",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/austria/niederosterreich.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/austria/niederosterreich.poly",
+   "bbox": [
+    14.435,
+    47.4,
+    17.09,
+    49.04
+   ],
+   "area_km2": 21164,
+   "source": "osmfr"
+  },
+  {
+   "id": "AT-oberosterreich",
+   "country": "AT",
+   "country_name": "Austria",
+   "name": "Oberosterreich",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/austria/oberosterreich.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/austria/oberosterreich.poly",
+   "bbox": [
+    12.73,
+    47.44,
+    15.01,
+    48.795
+   ],
+   "area_km2": 13357,
+   "source": "osmfr"
+  },
+  {
+   "id": "AT-salzburg",
+   "country": "AT",
+   "country_name": "Austria",
+   "name": "Salzburg",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/austria/salzburg.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/austria/salzburg.poly",
+   "bbox": [
+    12.055,
+    46.925,
+    14.015,
+    48.06
+   ],
+   "area_km2": 8470,
+   "source": "osmfr"
+  },
+  {
+   "id": "AT-steiermark",
+   "country": "AT",
+   "country_name": "Austria",
+   "name": "Steiermark",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/austria/steiermark.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/austria/steiermark.poly",
+   "bbox": [
+    13.545,
+    46.59,
+    16.19,
+    47.85
+   ],
+   "area_km2": 17863,
+   "source": "osmfr"
+  },
+  {
+   "id": "AT-tirol",
+   "country": "AT",
+   "country_name": "Austria",
+   "name": "Tirol",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/austria/tirol.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/austria/tirol.poly",
+   "bbox": [
+    10.08,
+    46.63,
+    12.985,
+    47.765
+   ],
+   "area_km2": 14424,
+   "source": "osmfr"
+  },
+  {
+   "id": "AT-vorarlberg",
+   "country": "AT",
+   "country_name": "Austria",
+   "name": "Vorarlberg",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/austria/vorarlberg.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/austria/vorarlberg.poly",
+   "bbox": [
+    9.527,
+    46.837,
+    10.241,
+    47.6
+   ],
+   "area_km2": 2742,
+   "source": "osmfr"
+  },
+  {
+   "id": "AT-wien",
+   "country": "AT",
+   "country_name": "Austria",
+   "name": "Wien",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/austria/wien.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/austria/wien.poly",
+   "bbox": [
+    16.178,
+    48.114,
+    16.582,
+    48.327
+   ],
+   "area_km2": 460,
+   "source": "osmfr"
+  },
+  {
+   "id": "BE-brussels_capital_region",
+   "country": "BE",
+   "country_name": "Belgium",
+   "name": "Brussels Capital Region",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/belgium/brussels_capital_region.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/belgium/brussels_capital_region.poly",
+   "bbox": [
+    4.24,
+    50.76,
+    4.486,
+    50.917
+   ],
+   "area_km2": 186,
+   "source": "osmfr"
+  },
+  {
+   "id": "BE-flanders",
+   "country": "BE",
+   "country_name": "Belgium",
+   "name": "Flanders",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/belgium/flanders.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/belgium/flanders.poly",
+   "bbox": [
+    2.52,
+    50.665,
+    5.93,
+    51.525
+   ],
+   "area_km2": 15343,
+   "source": "osmfr"
+  },
+  {
+   "id": "BE-wallonia_french_community",
+   "country": "BE",
+   "country_name": "Belgium",
+   "name": "Wallonia French Community",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/belgium/wallonia_french_community.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/belgium/wallonia_french_community.poly",
+   "bbox": [
+    2.82,
+    49.475,
+    6.22,
+    50.83
+   ],
+   "area_km2": 17818,
+   "source": "osmfr"
+  },
+  {
+   "id": "BE-wallonia_german_community",
+   "country": "BE",
+   "country_name": "Belgium",
+   "name": "Wallonia German Community",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/belgium/wallonia_german_community.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/belgium/wallonia_german_community.poly",
+   "bbox": [
+    5.951,
+    50.125,
+    6.412,
+    50.758
+   ],
+   "area_km2": 954,
+   "source": "osmfr"
+  },
+  {
+   "id": "CZ-jihocesky",
+   "country": "CZ",
+   "country_name": "Czech Republic",
+   "name": "Jihocesky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/czech_republic/jihocesky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/czech_republic/jihocesky.poly",
+   "bbox": [
+    13.515,
+    48.53,
+    15.625,
+    49.64
+   ],
+   "area_km2": 11187,
+   "source": "osmfr"
+  },
+  {
+   "id": "CZ-jihomoravsky",
+   "country": "CZ",
+   "country_name": "Czech Republic",
+   "name": "Jihomoravsky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/czech_republic/jihomoravsky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/czech_republic/jihomoravsky.poly",
+   "bbox": [
+    15.52,
+    48.595,
+    17.665,
+    49.655
+   ],
+   "area_km2": 8341,
+   "source": "osmfr"
+  },
+  {
+   "id": "CZ-karlovarsky",
+   "country": "CZ",
+   "country_name": "Czech Republic",
+   "name": "Karlovarsky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/czech_republic/karlovarsky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/czech_republic/karlovarsky.poly",
+   "bbox": [
+    12.07,
+    49.87,
+    13.32,
+    50.48
+   ],
+   "area_km2": 3922,
+   "source": "osmfr"
+  },
+  {
+   "id": "CZ-kralovehradecky",
+   "country": "CZ",
+   "country_name": "Czech Republic",
+   "name": "Kralovehradecky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/czech_republic/kralovehradecky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/czech_republic/kralovehradecky.poly",
+   "bbox": [
+    15.085,
+    50.02,
+    16.605,
+    50.8
+   ],
+   "area_km2": 5610,
+   "source": "osmfr"
+  },
+  {
+   "id": "CZ-liberecky",
+   "country": "CZ",
+   "country_name": "Czech Republic",
+   "name": "Liberecky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/czech_republic/liberecky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/czech_republic/liberecky.poly",
+   "bbox": [
+    14.325,
+    50.45,
+    15.655,
+    51.045
+   ],
+   "area_km2": 3799,
+   "source": "osmfr"
+  },
+  {
+   "id": "CZ-moravskoslezsky",
+   "country": "CZ",
+   "country_name": "Czech Republic",
+   "name": "Moravskoslezsky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/czech_republic/moravskoslezsky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/czech_republic/moravskoslezsky.poly",
+   "bbox": [
+    17.125,
+    49.375,
+    18.88,
+    50.35
+   ],
+   "area_km2": 6352,
+   "source": "osmfr"
+  },
+  {
+   "id": "CZ-olomoucky",
+   "country": "CZ",
+   "country_name": "Czech Republic",
+   "name": "Olomoucky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/czech_republic/olomoucky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/czech_republic/olomoucky.poly",
+   "bbox": [
+    16.69,
+    49.25,
+    17.94,
+    50.47
+   ],
+   "area_km2": 6257,
+   "source": "osmfr"
+  },
+  {
+   "id": "CZ-pardubicky",
+   "country": "CZ",
+   "country_name": "Czech Republic",
+   "name": "Pardubicky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/czech_republic/pardubicky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/czech_republic/pardubicky.poly",
+   "bbox": [
+    15.345,
+    49.55,
+    16.885,
+    50.23
+   ],
+   "area_km2": 5285,
+   "source": "osmfr"
+  },
+  {
+   "id": "CZ-plzensky",
+   "country": "CZ",
+   "country_name": "Czech Republic",
+   "name": "Plzensky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/czech_republic/plzensky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/czech_republic/plzensky.poly",
+   "bbox": [
+    12.38,
+    48.92,
+    13.86,
+    50.125
+   ],
+   "area_km2": 8479,
+   "source": "osmfr"
+  },
+  {
+   "id": "CZ-praha",
+   "country": "CZ",
+   "country_name": "Czech Republic",
+   "name": "Praha",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/czech_republic/praha.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/czech_republic/praha.poly",
+   "bbox": [
+    14.221,
+    49.938,
+    14.711,
+    50.181
+   ],
+   "area_km2": 549,
+   "source": "osmfr"
+  },
+  {
+   "id": "CZ-stredocesky",
+   "country": "CZ",
+   "country_name": "Czech Republic",
+   "name": "Stredocesky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/czech_republic/stredocesky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/czech_republic/stredocesky.poly",
+   "bbox": [
+    13.375,
+    49.48,
+    15.555,
+    50.64
+   ],
+   "area_km2": 12600,
+   "source": "osmfr"
+  },
+  {
+   "id": "CZ-ustecky",
+   "country": "CZ",
+   "country_name": "Czech Republic",
+   "name": "Ustecky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/czech_republic/ustecky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/czech_republic/ustecky.poly",
+   "bbox": [
+    12.92,
+    50.055,
+    14.675,
+    51.075
+   ],
+   "area_km2": 6282,
+   "source": "osmfr"
+  },
+  {
+   "id": "CZ-vysocina",
+   "country": "CZ",
+   "country_name": "Czech Republic",
+   "name": "Vysocina",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/czech_republic/vysocina.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/czech_republic/vysocina.poly",
+   "bbox": [
+    14.87,
+    48.92,
+    16.44,
+    49.88
+   ],
+   "area_km2": 7683,
+   "source": "osmfr"
+  },
+  {
+   "id": "CZ-zlinsky",
+   "country": "CZ",
+   "country_name": "Czech Republic",
+   "name": "Zlinsky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/czech_republic/zlinsky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/czech_republic/zlinsky.poly",
+   "bbox": [
+    17.09,
+    48.835,
+    18.435,
+    49.56
+   ],
+   "area_km2": 4606,
+   "source": "osmfr"
+  },
+  {
+   "id": "DK-hovedstaden",
+   "country": "DK",
+   "country_name": "Denmark",
+   "name": "Hovedstaden",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/denmark/hovedstaden.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/denmark/hovedstaden.poly",
+   "bbox": [
+    11.66,
+    54.965,
+    15.175,
+    56.225
+   ],
+   "area_km2": 3401,
+   "source": "osmfr"
+  },
+  {
+   "id": "DK-midtjylland",
+   "country": "DK",
+   "country_name": "Denmark",
+   "name": "Midtjylland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/denmark/midtjylland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/denmark/midtjylland.poly",
+   "bbox": [
+    8.08,
+    55.65,
+    11.685,
+    56.865
+   ],
+   "area_km2": 15408,
+   "source": "osmfr"
+  },
+  {
+   "id": "DK-nordjylland",
+   "country": "DK",
+   "country_name": "Denmark",
+   "name": "Nordjylland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/denmark/nordjylland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/denmark/nordjylland.poly",
+   "bbox": [
+    8.2,
+    56.53,
+    11.22,
+    57.77
+   ],
+   "area_km2": 9608,
+   "source": "osmfr"
+  },
+  {
+   "id": "DK-sjaelland",
+   "country": "DK",
+   "country_name": "Denmark",
+   "name": "Sjaelland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/denmark/sjaelland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/denmark/sjaelland.poly",
+   "bbox": [
+    10.85,
+    54.54,
+    12.575,
+    56.03
+   ],
+   "area_km2": 9643,
+   "source": "osmfr"
+  },
+  {
+   "id": "DK-syddanmark",
+   "country": "DK",
+   "country_name": "Denmark",
+   "name": "Syddanmark",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/denmark/syddanmark.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/denmark/syddanmark.poly",
+   "bbox": [
+    8.055,
+    54.7,
+    10.975,
+    55.975
+   ],
+   "area_km2": 14874,
+   "source": "osmfr"
+  },
+  {
+   "id": "FI-aland",
+   "country": "FI",
+   "country_name": "Finland",
+   "name": "Aland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/finland/aland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/finland/aland.poly",
+   "bbox": [
+    19.065,
+    59.435,
+    21.365,
+    60.895
+   ],
+   "area_km2": 14152,
+   "source": "osmfr"
+  },
+  {
+   "id": "FI-central_finland",
+   "country": "FI",
+   "country_name": "Finland",
+   "name": "Central Finland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/finland/central_finland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/finland/central_finland.poly",
+   "bbox": [
+    23.995,
+    61.43,
+    26.8,
+    63.63
+   ],
+   "area_km2": 21294,
+   "source": "osmfr"
+  },
+  {
+   "id": "FI-central_ostrobothnia",
+   "country": "FI",
+   "country_name": "Finland",
+   "name": "Central Ostrobothnia",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/finland/central_ostrobothnia.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/finland/central_ostrobothnia.poly",
+   "bbox": [
+    22.27,
+    63.095,
+    25.055,
+    64.2
+   ],
+   "area_km2": 7267,
+   "source": "osmfr"
+  },
+  {
+   "id": "FI-kainuu",
+   "country": "FI",
+   "country_name": "Finland",
+   "name": "Kainuu",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/finland/kainuu.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/finland/kainuu.poly",
+   "bbox": [
+    26.27,
+    63.65,
+    30.575,
+    65.54
+   ],
+   "area_km2": 25651,
+   "source": "osmfr"
+  },
+  {
+   "id": "FI-kanta_hame",
+   "country": "FI",
+   "country_name": "Finland",
+   "name": "Kanta Hame",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/finland/kanta_hame.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/finland/kanta_hame.poly",
+   "bbox": [
+    23.115,
+    60.535,
+    25.29,
+    61.345
+   ],
+   "area_km2": 6495,
+   "source": "osmfr"
+  },
+  {
+   "id": "FI-kymenlaakso",
+   "country": "FI",
+   "country_name": "Finland",
+   "name": "Kymenlaakso",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/finland/kymenlaakso.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/finland/kymenlaakso.poly",
+   "bbox": [
+    26.215,
+    60.15,
+    28.01,
+    61.315
+   ],
+   "area_km2": 7493,
+   "source": "osmfr"
+  },
+  {
+   "id": "FI-lapland",
+   "country": "FI",
+   "country_name": "Finland",
+   "name": "Lapland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/finland/lapland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/finland/lapland.poly",
+   "bbox": [
+    20.53,
+    65.27,
+    30.035,
+    70.11
+   ],
+   "area_km2": 102805,
+   "source": "osmfr"
+  },
+  {
+   "id": "FI-north_karelia",
+   "country": "FI",
+   "country_name": "Finland",
+   "name": "North Karelia",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/finland/north_karelia.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/finland/north_karelia.poly",
+   "bbox": [
+    28.23,
+    61.7,
+    31.605,
+    63.9
+   ],
+   "area_km2": 24139,
+   "source": "osmfr"
+  },
+  {
+   "id": "FI-north_ostrobothnia",
+   "country": "FI",
+   "country_name": "Finland",
+   "name": "North Ostrobothnia",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/finland/north_ostrobothnia.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/finland/north_ostrobothnia.poly",
+   "bbox": [
+    22.76,
+    63.41,
+    30.16,
+    66.505
+   ],
+   "area_km2": 47791,
+   "source": "osmfr"
+  },
+  {
+   "id": "FI-north_savo",
+   "country": "FI",
+   "country_name": "Finland",
+   "name": "North Savo",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/finland/north_savo.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/finland/north_savo.poly",
+   "bbox": [
+    26.02,
+    61.97,
+    29.12,
+    64.055
+   ],
+   "area_km2": 22390,
+   "source": "osmfr"
+  },
+  {
+   "id": "FI-ostrobothnia",
+   "country": "FI",
+   "country_name": "Finland",
+   "name": "Ostrobothnia",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/finland/ostrobothnia.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/finland/ostrobothnia.poly",
+   "bbox": [
+    20.145,
+    61.9,
+    23.765,
+    64.03
+   ],
+   "area_km2": 19389,
+   "source": "osmfr"
+  },
+  {
+   "id": "FI-paijat_hame",
+   "country": "FI",
+   "country_name": "Finland",
+   "name": "Paijat Hame",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/finland/paijat_hame.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/finland/paijat_hame.poly",
+   "bbox": [
+    24.835,
+    60.65,
+    26.565,
+    61.82
+   ],
+   "area_km2": 7743,
+   "source": "osmfr"
+  },
+  {
+   "id": "FI-pirkanmaa",
+   "country": "FI",
+   "country_name": "Finland",
+   "name": "Pirkanmaa",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/finland/pirkanmaa.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/finland/pirkanmaa.poly",
+   "bbox": [
+    22.415,
+    60.92,
+    25.555,
+    62.515
+   ],
+   "area_km2": 16763,
+   "source": "osmfr"
+  },
+  {
+   "id": "FI-satakunta",
+   "country": "FI",
+   "country_name": "Finland",
+   "name": "Satakunta",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/finland/satakunta.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/finland/satakunta.poly",
+   "bbox": [
+    20.755,
+    60.85,
+    23.025,
+    62.33
+   ],
+   "area_km2": 12424,
+   "source": "osmfr"
+  },
+  {
+   "id": "FI-south_karelia",
+   "country": "FI",
+   "country_name": "Finland",
+   "name": "South Karelia",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/finland/south_karelia.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/finland/south_karelia.poly",
+   "bbox": [
+    27.1,
+    60.645,
+    30.165,
+    61.885
+   ],
+   "area_km2": 7735,
+   "source": "osmfr"
+  },
+  {
+   "id": "FI-south_ostrobothnia",
+   "country": "FI",
+   "country_name": "Finland",
+   "name": "South Ostrobothnia",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/finland/south_ostrobothnia.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/finland/south_ostrobothnia.poly",
+   "bbox": [
+    21.495,
+    61.96,
+    24.605,
+    63.52
+   ],
+   "area_km2": 15437,
+   "source": "osmfr"
+  },
+  {
+   "id": "FI-south_savo",
+   "country": "FI",
+   "country_name": "Finland",
+   "name": "South Savo",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/finland/south_savo.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/finland/south_savo.poly",
+   "bbox": [
+    26.195,
+    61.13,
+    29.715,
+    62.675
+   ],
+   "area_km2": 20454,
+   "source": "osmfr"
+  },
+  {
+   "id": "FI-southwest_finland",
+   "country": "FI",
+   "country_name": "Finland",
+   "name": "Southwest Finland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/finland/southwest_finland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/finland/southwest_finland.poly",
+   "bbox": [
+    20.36,
+    59.455,
+    23.94,
+    61.155
+   ],
+   "area_km2": 22020,
+   "source": "osmfr"
+  },
+  {
+   "id": "FI-uusimaa",
+   "country": "FI",
+   "country_name": "Finland",
+   "name": "Uusimaa",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/finland/uusimaa.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/finland/uusimaa.poly",
+   "bbox": [
+    22.64,
+    59.59,
+    26.675,
+    60.86
+   ],
+   "area_km2": 17299,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-alsace",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Alsace",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/alsace.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/alsace.poly",
+   "bbox": [
+    6.82,
+    47.4,
+    8.255,
+    49.1
+   ],
+   "area_km2": 9495,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-aquitaine",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Aquitaine",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/aquitaine.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/aquitaine.poly",
+   "bbox": [
+    -1.81,
+    42.76,
+    1.47,
+    45.735
+   ],
+   "area_km2": 44631,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-auvergne",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Auvergne",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/auvergne.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/auvergne.poly",
+   "bbox": [
+    2.045,
+    44.595,
+    4.51,
+    46.825
+   ],
+   "area_km2": 28322,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-basse_normandie",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Basse Normandie",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/basse_normandie.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/basse_normandie.poly",
+   "bbox": [
+    -1.975,
+    48.16,
+    0.995,
+    49.75
+   ],
+   "area_km2": 19581,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-bourgogne",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Bourgogne",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/bourgogne.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/bourgogne.poly",
+   "bbox": [
+    2.825,
+    46.135,
+    5.54,
+    48.42
+   ],
+   "area_km2": 33815,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-bretagne",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Bretagne",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/bretagne.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/bretagne.poly",
+   "bbox": [
+    -5.16,
+    47.26,
+    -0.995,
+    49.135
+   ],
+   "area_km2": 31114,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-centre",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Centre",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/centre.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/centre.poly",
+   "bbox": [
+    0.035,
+    46.325,
+    3.15,
+    48.96
+   ],
+   "area_km2": 41695,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-champagne_ardenne",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Champagne Ardenne",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/champagne_ardenne.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/champagne_ardenne.poly",
+   "bbox": [
+    3.365,
+    47.555,
+    5.91,
+    50.19
+   ],
+   "area_km2": 27868,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-corse",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Corse",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/corse.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/corse.poly",
+   "bbox": [
+    8.515,
+    41.315,
+    9.58,
+    43.05
+   ],
+   "area_km2": 10104,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-franche_comte",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Franche Comte",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/franche_comte.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/franche_comte.poly",
+   "bbox": [
+    5.23,
+    46.24,
+    7.165,
+    48.045
+   ],
+   "area_km2": 17736,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-haute_normandie",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Haute Normandie",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/haute_normandie.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/haute_normandie.poly",
+   "bbox": [
+    0.045,
+    48.645,
+    1.825,
+    50.095
+   ],
+   "area_km2": 13405,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-ile_de_france",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Ile de France",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/ile_de_france.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/ile_de_france.poly",
+   "bbox": [
+    1.425,
+    48.1,
+    3.58,
+    49.26
+   ],
+   "area_km2": 13244,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-languedoc_roussillon",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Languedoc Roussillon",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/languedoc_roussillon.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/languedoc_roussillon.poly",
+   "bbox": [
+    1.67,
+    42.315,
+    4.865,
+    44.995
+   ],
+   "area_km2": 30385,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-limousin",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Limousin",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/limousin.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/limousin.poly",
+   "bbox": [
+    0.61,
+    44.9,
+    2.63,
+    46.475
+   ],
+   "area_km2": 18469,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-lorraine",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Lorraine",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/lorraine.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/lorraine.poly",
+   "bbox": [
+    4.87,
+    47.795,
+    7.66,
+    49.635
+   ],
+   "area_km2": 25490,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-midi_pyrenees",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Midi Pyrenees",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/midi_pyrenees.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/midi_pyrenees.poly",
+   "bbox": [
+    -0.35,
+    42.555,
+    3.47,
+    45.065
+   ],
+   "area_km2": 48614,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-nord_pas_de_calais",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Nord Pas de Calais",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/nord_pas_de_calais.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/nord_pas_de_calais.poly",
+   "bbox": [
+    1.535,
+    49.95,
+    4.25,
+    51.11
+   ],
+   "area_km2": 13783,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-pays_de_la_loire",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Pays de la Loire",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/pays_de_la_loire.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/pays_de_la_loire.poly",
+   "bbox": [
+    -2.645,
+    46.245,
+    0.935,
+    48.59
+   ],
+   "area_km2": 34833,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-picardie",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Picardie",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/picardie.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/picardie.poly",
+   "bbox": [
+    1.36,
+    48.815,
+    4.275,
+    50.385
+   ],
+   "area_km2": 21206,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-poitou_charentes",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Poitou Charentes",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/poitou_charentes.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/poitou_charentes.poly",
+   "bbox": [
+    -1.585,
+    45.07,
+    1.235,
+    47.195
+   ],
+   "area_km2": 28189,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-provence_alpes_cote_d_azur",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Provence Alpes Cote D Azur",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/provence_alpes_cote_d_azur.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/provence_alpes_cote_d_azur.poly",
+   "bbox": [
+    4.21,
+    42.96,
+    7.74,
+    45.145
+   ],
+   "area_km2": 34764,
+   "source": "osmfr"
+  },
+  {
+   "id": "FR-rhone_alpes",
+   "country": "FR",
+   "country_name": "France",
+   "name": "Rhone Alpes",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/france/rhone_alpes.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/france/rhone_alpes.poly",
+   "bbox": [
+    3.67,
+    44.095,
+    7.205,
+    46.54
+   ],
+   "area_km2": 48060,
+   "source": "osmfr"
+  },
+  {
+   "id": "DE-nordrhein_westfalen",
+   "country": "DE",
+   "country_name": "Germany",
+   "name": "Nordrhein Westfalen",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/germany/nordrhein_westfalen.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/germany/nordrhein_westfalen.poly",
+   "bbox": [
+    5.845,
+    50.305,
+    9.48,
+    52.55
+   ],
+   "area_km2": 36523,
+   "source": "osmfr"
+  },
+  {
+   "id": "GI",
+   "country": "GI",
+   "country_name": "Gibraltar",
+   "name": "Gibraltar",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/gibraltar.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/gibraltar.poly",
+   "bbox": [
+    -5.405,
+    36.055,
+    -5.273,
+    36.162
+   ],
+   "area_km2": 108,
+   "source": "osmfr"
+  },
+  {
+   "id": "GG",
+   "country": "GG",
+   "country_name": "Guernsey",
+   "name": "Guernsey",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/guernesey.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/guernesey.poly",
+   "bbox": [
+    -3.04,
+    49.2,
+    -2.015,
+    49.96
+   ],
+   "area_km2": 4334,
+   "source": "osmfr"
+  },
+  {
+   "id": "IE",
+   "country": "IE",
+   "country_name": "Ireland",
+   "name": "Ireland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ireland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ireland.poly",
+   "bbox": [
+    -11.035,
+    51.2,
+    -5.64,
+    55.655
+   ],
+   "area_km2": 111578,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-abruzzo",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Abruzzo",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/abruzzo.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/abruzzo.poly",
+   "bbox": [
+    13.0,
+    41.66,
+    14.805,
+    42.915
+   ],
+   "area_km2": 11926,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-basilicata",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Basilicata",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/basilicata.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/basilicata.poly",
+   "bbox": [
+    15.315,
+    39.875,
+    16.885,
+    41.16
+   ],
+   "area_km2": 11099,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-calabria",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Calabria",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/calabria.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/calabria.poly",
+   "bbox": [
+    15.61,
+    37.895,
+    17.225,
+    40.165
+   ],
+   "area_km2": 16673,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-campania",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Campania",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/campania.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/campania.poly",
+   "bbox": [
+    13.74,
+    39.97,
+    15.825,
+    41.53
+   ],
+   "area_km2": 15301,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-emilia_romagna",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Emilia Romagna",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/emilia_romagna.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/emilia_romagna.poly",
+   "bbox": [
+    9.18,
+    43.71,
+    12.775,
+    45.16
+   ],
+   "area_km2": 24612,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-friuli_venezia_giulia",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Friuli Venezia Giulia",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/friuli_venezia_giulia.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/friuli_venezia_giulia.poly",
+   "bbox": [
+    12.3,
+    45.56,
+    13.94,
+    46.67
+   ],
+   "area_km2": 9057,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-lazio",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Lazio",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/lazio.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/lazio.poly",
+   "bbox": [
+    11.43,
+    40.765,
+    14.05,
+    42.86
+   ],
+   "area_km2": 19198,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-liguria",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Liguria",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/liguria.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/liguria.poly",
+   "bbox": [
+    7.475,
+    43.755,
+    10.09,
+    44.695
+   ],
+   "area_km2": 6845,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-lombardia",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Lombardia",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/lombardia.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/lombardia.poly",
+   "bbox": [
+    8.48,
+    44.66,
+    11.45,
+    46.655
+   ],
+   "area_km2": 26248,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-marche",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Marche",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/marche.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/marche.poly",
+   "bbox": [
+    12.165,
+    42.665,
+    13.935,
+    43.99
+   ],
+   "area_km2": 10483,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-molise",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Molise",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/molise.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/molise.poly",
+   "bbox": [
+    13.92,
+    41.345,
+    15.18,
+    42.09
+   ],
+   "area_km2": 5233,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-piemonte",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Piemonte",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/piemonte.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/piemonte.poly",
+   "bbox": [
+    6.605,
+    44.04,
+    9.235,
+    46.485
+   ],
+   "area_km2": 27494,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-puglia",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Puglia",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/puglia.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/puglia.poly",
+   "bbox": [
+    14.915,
+    39.77,
+    18.54,
+    42.245
+   ],
+   "area_km2": 21586,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-sardegna",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Sardegna",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/sardegna.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/sardegna.poly",
+   "bbox": [
+    8.11,
+    38.84,
+    9.85,
+    41.335
+   ],
+   "area_km2": 26662,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-sicilia",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Sicilia",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/sicilia.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/sicilia.poly",
+   "bbox": [
+    11.905,
+    35.475,
+    15.675,
+    38.84
+   ],
+   "area_km2": 28577,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-toscana",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Toscana",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/toscana.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/toscana.poly",
+   "bbox": [
+    9.665,
+    42.22,
+    12.39,
+    44.495
+   ],
+   "area_km2": 25521,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-trentino_alto_adige",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Trentino Alto Adige",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/trentino_alto_adige.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/trentino_alto_adige.poly",
+   "bbox": [
+    10.36,
+    45.655,
+    12.5,
+    47.11
+   ],
+   "area_km2": 15017,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-umbria",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Umbria",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/umbria.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/umbria.poly",
+   "bbox": [
+    11.875,
+    42.345,
+    13.285,
+    43.635
+   ],
+   "area_km2": 9538,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-valle_aosta",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Valle Aosta",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/valle_aosta.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/valle_aosta.poly",
+   "bbox": [
+    6.785,
+    45.445,
+    7.96,
+    46.01
+   ],
+   "area_km2": 3841,
+   "source": "osmfr"
+  },
+  {
+   "id": "IT-veneto",
+   "country": "IT",
+   "country_name": "Italy",
+   "name": "Veneto",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/italy/veneto.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/italy/veneto.poly",
+   "bbox": [
+    10.605,
+    44.77,
+    13.12,
+    46.7
+   ],
+   "area_km2": 20167,
+   "source": "osmfr"
+  },
+  {
+   "id": "JE",
+   "country": "JE",
+   "country_name": "Jersey",
+   "name": "Jersey",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/jersey.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/jersey.poly",
+   "bbox": [
+    -2.563,
+    48.868,
+    -1.829,
+    49.464
+   ],
+   "area_km2": 2467,
+   "source": "osmfr"
+  },
+  {
+   "id": "LU",
+   "country": "LU",
+   "country_name": "Luxembourg",
+   "name": "Luxembourg",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/luxembourg.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/luxembourg.poly",
+   "bbox": [
+    5.732,
+    49.444,
+    6.535,
+    50.187
+   ],
+   "area_km2": 2713,
+   "source": "osmfr"
+  },
+  {
+   "id": "MC",
+   "country": "MC",
+   "country_name": "Monaco",
+   "name": "Monaco",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/monaco.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/monaco.poly",
+   "bbox": [
+    7.405,
+    43.512,
+    7.537,
+    43.756
+   ],
+   "area_km2": 101,
+   "source": "osmfr"
+  },
+  {
+   "id": "NL-drenthe",
+   "country": "NL",
+   "country_name": "Netherlands",
+   "name": "Drenthe",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/netherlands/drenthe.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/netherlands/drenthe.poly",
+   "bbox": [
+    6.116,
+    52.608,
+    7.097,
+    53.208
+   ],
+   "area_km2": 2767,
+   "source": "osmfr"
+  },
+  {
+   "id": "NL-flevoland",
+   "country": "NL",
+   "country_name": "Netherlands",
+   "name": "Flevoland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/netherlands/flevoland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/netherlands/flevoland.poly",
+   "bbox": [
+    5.056,
+    52.246,
+    6.021,
+    52.848
+   ],
+   "area_km2": 2492,
+   "source": "osmfr"
+  },
+  {
+   "id": "NL-friesland",
+   "country": "NL",
+   "country_name": "Netherlands",
+   "name": "Friesland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/netherlands/friesland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/netherlands/friesland.poly",
+   "bbox": [
+    4.8,
+    52.745,
+    6.45,
+    53.56
+   ],
+   "area_km2": 6436,
+   "source": "osmfr"
+  },
+  {
+   "id": "NL-gelderland",
+   "country": "NL",
+   "country_name": "Netherlands",
+   "name": "Gelderland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/netherlands/gelderland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/netherlands/gelderland.poly",
+   "bbox": [
+    4.975,
+    51.715,
+    6.855,
+    52.54
+   ],
+   "area_km2": 6046,
+   "source": "osmfr"
+  },
+  {
+   "id": "NL-groningen",
+   "country": "NL",
+   "country_name": "Netherlands",
+   "name": "Groningen",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/netherlands/groningen.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/netherlands/groningen.poly",
+   "bbox": [
+    6.15,
+    52.82,
+    7.245,
+    53.595
+   ],
+   "area_km2": 3471,
+   "source": "osmfr"
+  },
+  {
+   "id": "NL-limburg",
+   "country": "NL",
+   "country_name": "Netherlands",
+   "name": "Limburg",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/netherlands/limburg.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/netherlands/limburg.poly",
+   "bbox": [
+    5.545,
+    50.73,
+    6.245,
+    51.8
+   ],
+   "area_km2": 2942,
+   "source": "osmfr"
+  },
+  {
+   "id": "NL-noord_brabant",
+   "country": "NL",
+   "country_name": "Netherlands",
+   "name": "Noord Brabant",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/netherlands/noord_brabant.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/netherlands/noord_brabant.poly",
+   "bbox": [
+    4.17,
+    51.2,
+    6.07,
+    51.85
+   ],
+   "area_km2": 5912,
+   "source": "osmfr"
+  },
+  {
+   "id": "NL-noord_holland",
+   "country": "NL",
+   "country_name": "Netherlands",
+   "name": "Noord Holland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/netherlands/noord_holland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/netherlands/noord_holland.poly",
+   "bbox": [
+    4.46,
+    52.145,
+    5.395,
+    53.235
+   ],
+   "area_km2": 4716,
+   "source": "osmfr"
+  },
+  {
+   "id": "NL-overijssel",
+   "country": "NL",
+   "country_name": "Netherlands",
+   "name": "Overijssel",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/netherlands/overijssel.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/netherlands/overijssel.poly",
+   "bbox": [
+    5.76,
+    52.1,
+    7.095,
+    52.875
+   ],
+   "area_km2": 4107,
+   "source": "osmfr"
+  },
+  {
+   "id": "NL-utrecht",
+   "country": "NL",
+   "country_name": "Netherlands",
+   "name": "Utrecht",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/netherlands/utrecht.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/netherlands/utrecht.poly",
+   "bbox": [
+    4.788,
+    51.853,
+    5.631,
+    52.308
+   ],
+   "area_km2": 1656,
+   "source": "osmfr"
+  },
+  {
+   "id": "NL-zeeland",
+   "country": "NL",
+   "country_name": "Netherlands",
+   "name": "Zeeland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/netherlands/zeeland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/netherlands/zeeland.poly",
+   "bbox": [
+    3.304,
+    51.196,
+    4.281,
+    51.786
+   ],
+   "area_km2": 3015,
+   "source": "osmfr"
+  },
+  {
+   "id": "NL-zuid_holland",
+   "country": "NL",
+   "country_name": "Netherlands",
+   "name": "Zuid Holland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/netherlands/zuid_holland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/netherlands/zuid_holland.poly",
+   "bbox": [
+    3.755,
+    51.625,
+    5.05,
+    52.35
+   ],
+   "area_km2": 3879,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-akershus",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Akershus",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/akershus.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/akershus.poly",
+   "bbox": [
+    10.175,
+    59.435,
+    11.965,
+    60.625
+   ],
+   "area_km2": 7182,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-aust_agder",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Aust Agder",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/aust-agder.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/aust-agder.poly",
+   "bbox": [
+    6.805,
+    57.895,
+    9.69,
+    59.695
+   ],
+   "area_km2": 13076,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-buskerud",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Buskerud",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/buskerud.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/buskerud.poly",
+   "bbox": [
+    7.42,
+    59.39,
+    10.655,
+    61.11
+   ],
+   "area_km2": 16391,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-finnmark",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Finnmark",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/finnmark.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/finnmark.poly",
+   "bbox": [
+    20.44,
+    68.51,
+    31.8,
+    71.42
+   ],
+   "area_km2": 78767,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-hedmark",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Hedmark",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/hedmark.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/hedmark.poly",
+   "bbox": [
+    9.565,
+    59.82,
+    12.89,
+    62.715
+   ],
+   "area_km2": 28724,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-hordaland",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Hordaland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/hordaland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/hordaland.poly",
+   "bbox": [
+    4.165,
+    59.455,
+    7.75,
+    61.055
+   ],
+   "area_km2": 23822,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-jan_mayen",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Jan Mayen",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/jan_mayen.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/jan_mayen.poly",
+   "bbox": [
+    -9.705,
+    70.605,
+    -7.295,
+    71.38
+   ],
+   "area_km2": 5077,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-moere_og_romsdal",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Moere Og Romsdal",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/moere_og_romsdal.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/moere_og_romsdal.poly",
+   "bbox": [
+    4.795,
+    61.905,
+    9.605,
+    63.79
+   ],
+   "area_km2": 27753,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-nordland",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Nordland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/nordland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/nordland.poly",
+   "bbox": [
+    10.56,
+    64.92,
+    18.17,
+    69.615
+   ],
+   "area_km2": 82747,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-oestfold",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Oestfold",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/oestfold.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/oestfold.poly",
+   "bbox": [
+    10.515,
+    58.74,
+    11.965,
+    59.81
+   ],
+   "area_km2": 5746,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-oppland",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Oppland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/oppland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/oppland.poly",
+   "bbox": [
+    7.325,
+    60.11,
+    11.175,
+    62.4
+   ],
+   "area_km2": 26660,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-oslo",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Oslo",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/oslo.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/oslo.poly",
+   "bbox": [
+    10.485,
+    59.805,
+    10.955,
+    60.139
+   ],
+   "area_km2": 514,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-rogaland",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Rogaland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/rogaland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/rogaland.poly",
+   "bbox": [
+    4.435,
+    58.01,
+    7.235,
+    59.865
+   ],
+   "area_km2": 17606,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-sogn_og_fjordane",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Sogn Og Fjordane",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/sogn_og_fjordane.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/sogn_og_fjordane.poly",
+   "bbox": [
+    4.07,
+    60.655,
+    8.34,
+    62.4
+   ],
+   "area_km2": 28428,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-svalbard",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Svalbard",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/svalbard.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/svalbard.poly",
+   "bbox": [
+    9.38,
+    74.1,
+    34.73,
+    81.07
+   ],
+   "area_km2": 158280,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-telemark",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Telemark",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/telemark.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/telemark.poly",
+   "bbox": [
+    7.075,
+    58.585,
+    9.99,
+    60.21
+   ],
+   "area_km2": 17164,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-troendelag",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Troendelag",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/troendelag.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/troendelag.poly",
+   "bbox": [
+    7.63,
+    62.235,
+    14.345,
+    65.49
+   ],
+   "area_km2": 61726,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-troms",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Troms",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/troms.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/troms.poly",
+   "bbox": [
+    15.575,
+    68.335,
+    22.915,
+    70.725
+   ],
+   "area_km2": 43063,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-vest_agder",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Vest Agder",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/vest-agder.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/vest-agder.poly",
+   "bbox": [
+    6.13,
+    57.74,
+    8.39,
+    59.21
+   ],
+   "area_km2": 12049,
+   "source": "osmfr"
+  },
+  {
+   "id": "NO-vestfold",
+   "country": "NO",
+   "country_name": "Norway",
+   "name": "Vestfold",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/norway/vestfold.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/norway/vestfold.poly",
+   "bbox": [
+    9.735,
+    58.7,
+    10.695,
+    59.72
+   ],
+   "area_km2": 4607,
+   "source": "osmfr"
+  },
+  {
+   "id": "PL-dolnoslaskie",
+   "country": "PL",
+   "country_name": "Poland",
+   "name": "Dolnoslaskie",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/poland/dolnoslaskie.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/poland/dolnoslaskie.poly",
+   "bbox": [
+    14.795,
+    50.075,
+    17.815,
+    51.825
+   ],
+   "area_km2": 21642,
+   "source": "osmfr"
+  },
+  {
+   "id": "PL-kujawsko_pomorskie",
+   "country": "PL",
+   "country_name": "Poland",
+   "name": "Kujawsko Pomorskie",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/poland/kujawsko_pomorskie.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/poland/kujawsko_pomorskie.poly",
+   "bbox": [
+    17.225,
+    52.31,
+    19.78,
+    53.8
+   ],
+   "area_km2": 19334,
+   "source": "osmfr"
+  },
+  {
+   "id": "PL-lodzkie",
+   "country": "PL",
+   "country_name": "Poland",
+   "name": "Lodzkie",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/poland/lodzkie.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/poland/lodzkie.poly",
+   "bbox": [
+    18.055,
+    50.825,
+    20.68,
+    52.415
+   ],
+   "area_km2": 19635,
+   "source": "osmfr"
+  },
+  {
+   "id": "PL-lubelskie",
+   "country": "PL",
+   "country_name": "Poland",
+   "name": "Lubelskie",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/poland/lubelskie.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/poland/lubelskie.poly",
+   "bbox": [
+    21.595,
+    50.23,
+    24.165,
+    52.31
+   ],
+   "area_km2": 26758,
+   "source": "osmfr"
+  },
+  {
+   "id": "PL-lubuskie",
+   "country": "PL",
+   "country_name": "Poland",
+   "name": "Lubuskie",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/poland/lubuskie.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/poland/lubuskie.poly",
+   "bbox": [
+    14.515,
+    51.345,
+    16.435,
+    53.145
+   ],
+   "area_km2": 15298,
+   "source": "osmfr"
+  },
+  {
+   "id": "PL-malopolskie",
+   "country": "PL",
+   "country_name": "Poland",
+   "name": "Malopolskie",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/poland/malopolskie.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/poland/malopolskie.poly",
+   "bbox": [
+    19.065,
+    49.16,
+    21.44,
+    50.54
+   ],
+   "area_km2": 16580,
+   "source": "osmfr"
+  },
+  {
+   "id": "PL-mazowieckie",
+   "country": "PL",
+   "country_name": "Poland",
+   "name": "Mazowieckie",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/poland/mazowieckie.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/poland/mazowieckie.poly",
+   "bbox": [
+    19.24,
+    50.995,
+    23.15,
+    53.5
+   ],
+   "area_km2": 37885,
+   "source": "osmfr"
+  },
+  {
+   "id": "PL-opolskie",
+   "country": "PL",
+   "country_name": "Poland",
+   "name": "Opolskie",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/poland/opolskie.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/poland/opolskie.poly",
+   "bbox": [
+    16.89,
+    49.955,
+    18.715,
+    51.215
+   ],
+   "area_km2": 10527,
+   "source": "osmfr"
+  },
+  {
+   "id": "PL-podkarpackie",
+   "country": "PL",
+   "country_name": "Poland",
+   "name": "Podkarpackie",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/poland/podkarpackie.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/poland/podkarpackie.poly",
+   "bbox": [
+    21.12,
+    48.98,
+    23.57,
+    50.84
+   ],
+   "area_km2": 19292,
+   "source": "osmfr"
+  },
+  {
+   "id": "PL-podlaskie",
+   "country": "PL",
+   "country_name": "Poland",
+   "name": "Podlaskie",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/poland/podlaskie.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/poland/podlaskie.poly",
+   "bbox": [
+    21.575,
+    52.26,
+    23.965,
+    54.43
+   ],
+   "area_km2": 21475,
+   "source": "osmfr"
+  },
+  {
+   "id": "PL-pomorskie",
+   "country": "PL",
+   "country_name": "Poland",
+   "name": "Pomorskie",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/poland/pomorskie.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/poland/pomorskie.poly",
+   "bbox": [
+    16.68,
+    53.47,
+    19.67,
+    54.855
+   ],
+   "area_km2": 20935,
+   "source": "osmfr"
+  },
+  {
+   "id": "PL-slaskie",
+   "country": "PL",
+   "country_name": "Poland",
+   "name": "Slaskie",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/poland/slaskie.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/poland/slaskie.poly",
+   "bbox": [
+    18.015,
+    49.375,
+    19.995,
+    51.12
+   ],
+   "area_km2": 13765,
+   "source": "osmfr"
+  },
+  {
+   "id": "PL-swietokrzyskie",
+   "country": "PL",
+   "country_name": "Poland",
+   "name": "Swietokrzyskie",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/poland/swietokrzyskie.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/poland/swietokrzyskie.poly",
+   "bbox": [
+    19.685,
+    50.165,
+    21.89,
+    51.36
+   ],
+   "area_km2": 12817,
+   "source": "osmfr"
+  },
+  {
+   "id": "PL-warminsko_mazurskie",
+   "country": "PL",
+   "country_name": "Poland",
+   "name": "Warminsko Mazurskie",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/poland/warminsko_mazurskie.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/poland/warminsko_mazurskie.poly",
+   "bbox": [
+    19.11,
+    53.12,
+    22.825,
+    54.475
+   ],
+   "area_km2": 25715,
+   "source": "osmfr"
+  },
+  {
+   "id": "PL-wielkopolskie",
+   "country": "PL",
+   "country_name": "Poland",
+   "name": "Wielkopolskie",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/poland/wielkopolskie.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/poland/wielkopolskie.poly",
+   "bbox": [
+    15.755,
+    51.085,
+    19.125,
+    53.675
+   ],
+   "area_km2": 31888,
+   "source": "osmfr"
+  },
+  {
+   "id": "PL-zachodniopomorskie",
+   "country": "PL",
+   "country_name": "Poland",
+   "name": "Zachodniopomorskie",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/poland/zachodniopomorskie.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/poland/zachodniopomorskie.poly",
+   "bbox": [
+    14.105,
+    52.605,
+    17.0,
+    54.59
+   ],
+   "area_km2": 24371,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-aveiro",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Aveiro",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/aveiro.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/aveiro.poly",
+   "bbox": [
+    -8.788,
+    40.275,
+    -8.085,
+    41.084
+   ],
+   "area_km2": 2935,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-azores",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Azores",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/azores.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/azores.poly",
+   "bbox": [
+    -31.58,
+    36.705,
+    -24.51,
+    39.945
+   ],
+   "area_km2": 35289,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-beja",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Beja",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/beja.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/beja.poly",
+   "bbox": [
+    -8.84,
+    37.3,
+    -6.91,
+    38.35
+   ],
+   "area_km2": 11490,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-braga",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Braga",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/braga.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/braga.poly",
+   "bbox": [
+    -8.83,
+    41.3,
+    -7.79,
+    41.84
+   ],
+   "area_km2": 3290,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-braganca",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Braganca",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/braganca.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/braganca.poly",
+   "bbox": [
+    -7.45,
+    41.005,
+    -6.17,
+    42.01
+   ],
+   "area_km2": 7418,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-castelo_branco",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Castelo Branco",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/castelo_branco.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/castelo_branco.poly",
+   "bbox": [
+    -8.315,
+    39.515,
+    -6.845,
+    40.435
+   ],
+   "area_km2": 7588,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-coimbra",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Coimbra",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/coimbra.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/coimbra.poly",
+   "bbox": [
+    -8.93,
+    39.905,
+    -7.71,
+    40.54
+   ],
+   "area_km2": 4853,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-evora",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Evora",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/evora.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/evora.poly",
+   "bbox": [
+    -8.68,
+    38.135,
+    -7.085,
+    39.045
+   ],
+   "area_km2": 8522,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-faro",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Faro",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/faro.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/faro.poly",
+   "bbox": [
+    -9.015,
+    36.94,
+    -7.375,
+    37.55
+   ],
+   "area_km2": 5885,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-guarda",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Guarda",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/guarda.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/guarda.poly",
+   "bbox": [
+    -7.87,
+    40.21,
+    -6.76,
+    41.2
+   ],
+   "area_km2": 6438,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-leiria",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Leiria",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/leiria.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/leiria.poly",
+   "bbox": [
+    -9.57,
+    39.19,
+    -8.09,
+    40.11
+   ],
+   "area_km2": 4439,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-lisbon",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Lisbon",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/lisbon.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/lisbon.poly",
+   "bbox": [
+    -9.505,
+    38.669,
+    -8.778,
+    39.322
+   ],
+   "area_km2": 2917,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-madeira",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Madeira",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/madeira.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/madeira.poly",
+   "bbox": [
+    -17.525,
+    29.81,
+    -15.605,
+    33.345
+   ],
+   "area_km2": 14163,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-portalegre",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Portalegre",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/portalegre.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/portalegre.poly",
+   "bbox": [
+    -8.365,
+    38.73,
+    -6.93,
+    39.685
+   ],
+   "area_km2": 7000,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-porto",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Porto",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/porto.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/porto.poly",
+   "bbox": [
+    -8.793,
+    40.997,
+    -7.872,
+    41.476
+   ],
+   "area_km2": 2452,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-santarem",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Santarem",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/santarem.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/santarem.poly",
+   "bbox": [
+    -9.02,
+    38.71,
+    -7.79,
+    39.86
+   ],
+   "area_km2": 7884,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-setubal",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Setubal",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/setubal.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/setubal.poly",
+   "bbox": [
+    -9.285,
+    37.73,
+    -8.11,
+    38.865
+   ],
+   "area_km2": 6228,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-viana_do_castelo",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Viana Do Castelo",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/viana_do_castelo.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/viana_do_castelo.poly",
+   "bbox": [
+    -8.885,
+    41.602,
+    -8.079,
+    42.158
+   ],
+   "area_km2": 2315,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-vila_real",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Vila Real",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/vila_real.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/vila_real.poly",
+   "bbox": [
+    -8.14,
+    41.1,
+    -7.15,
+    41.945
+   ],
+   "area_km2": 5061,
+   "source": "osmfr"
+  },
+  {
+   "id": "PT-viseu",
+   "country": "PT",
+   "country_name": "Portugal",
+   "name": "Viseu",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/portugal/viseu.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/portugal/viseu.poly",
+   "bbox": [
+    -8.38,
+    40.305,
+    -7.285,
+    41.235
+   ],
+   "area_km2": 5848,
+   "source": "osmfr"
+  },
+  {
+   "id": "SM",
+   "country": "SM",
+   "country_name": "San Marino",
+   "name": "San Marino",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/san_marino.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/san_marino.poly",
+   "bbox": [
+    12.399,
+    43.89,
+    12.52,
+    43.996
+   ],
+   "area_km2": 75,
+   "source": "osmfr"
+  },
+  {
+   "id": "SK-banskobystricky",
+   "country": "SK",
+   "country_name": "Slovakia",
+   "name": "Banskobystricky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/slovakia/banskobystricky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/slovakia/banskobystricky.poly",
+   "bbox": [
+    18.46,
+    48.035,
+    20.49,
+    48.965
+   ],
+   "area_km2": 10500,
+   "source": "osmfr"
+  },
+  {
+   "id": "SK-bratislavsky",
+   "country": "SK",
+   "country_name": "Slovakia",
+   "name": "Bratislavsky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/slovakia/bratislavsky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/slovakia/bratislavsky.poly",
+   "bbox": [
+    16.829,
+    48.003,
+    17.533,
+    48.658
+   ],
+   "area_km2": 2152,
+   "source": "osmfr"
+  },
+  {
+   "id": "SK-kosicky",
+   "country": "SK",
+   "country_name": "Slovakia",
+   "name": "Kosicky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/slovakia/kosicky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/slovakia/kosicky.poly",
+   "bbox": [
+    20.16,
+    48.315,
+    22.41,
+    49.04
+   ],
+   "area_km2": 7816,
+   "source": "osmfr"
+  },
+  {
+   "id": "SK-nitriansky",
+   "country": "SK",
+   "country_name": "Slovakia",
+   "name": "Nitriansky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/slovakia/nitriansky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/slovakia/nitriansky.poly",
+   "bbox": [
+    17.685,
+    47.71,
+    19.09,
+    48.735
+   ],
+   "area_km2": 7236,
+   "source": "osmfr"
+  },
+  {
+   "id": "SK-presovsky",
+   "country": "SK",
+   "country_name": "Slovakia",
+   "name": "Presovsky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/slovakia/presovsky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/slovakia/presovsky.poly",
+   "bbox": [
+    19.865,
+    48.745,
+    22.585,
+    49.48
+   ],
+   "area_km2": 10229,
+   "source": "osmfr"
+  },
+  {
+   "id": "SK-trenciansky",
+   "country": "SK",
+   "country_name": "Slovakia",
+   "name": "Trenciansky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/slovakia/trenciansky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/slovakia/trenciansky.poly",
+   "bbox": [
+    17.335,
+    48.465,
+    18.845,
+    49.34
+   ],
+   "area_km2": 5279,
+   "source": "osmfr"
+  },
+  {
+   "id": "SK-trnavsky",
+   "country": "SK",
+   "country_name": "Slovakia",
+   "name": "Trnavsky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/slovakia/trnavsky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/slovakia/trnavsky.poly",
+   "bbox": [
+    16.915,
+    47.74,
+    18.005,
+    48.9
+   ],
+   "area_km2": 5042,
+   "source": "osmfr"
+  },
+  {
+   "id": "SK-zilinsky",
+   "country": "SK",
+   "country_name": "Slovakia",
+   "name": "Zilinsky",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/slovakia/zilinsky.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/slovakia/zilinsky.poly",
+   "bbox": [
+    18.305,
+    48.72,
+    20.08,
+    49.635
+   ],
+   "area_km2": 7740,
+   "source": "osmfr"
+  },
+  {
+   "id": "ES-andalucia",
+   "country": "ES",
+   "country_name": "Spain",
+   "name": "Andalucía",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/spain/andalucia.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/spain/andalucia.poly",
+   "bbox": [
+    -7.545,
+    35.92,
+    -1.61,
+    38.75
+   ],
+   "area_km2": 91186,
+   "source": "osmfr"
+  },
+  {
+   "id": "ES-aragon",
+   "country": "ES",
+   "country_name": "Spain",
+   "name": "Aragón",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/spain/aragon.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/spain/aragon.poly",
+   "bbox": [
+    -2.195,
+    39.825,
+    0.79,
+    42.945
+   ],
+   "area_km2": 50277,
+   "source": "osmfr"
+  },
+  {
+   "id": "ES-asturias",
+   "country": "ES",
+   "country_name": "Spain",
+   "name": "Asturias",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/spain/asturias.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/spain/asturias.poly",
+   "bbox": [
+    -7.205,
+    42.865,
+    -4.49,
+    43.68
+   ],
+   "area_km2": 11969,
+   "source": "osmfr"
+  },
+  {
+   "id": "ES-canarias",
+   "country": "ES",
+   "country_name": "Spain",
+   "name": "Canarias / Canary Islands",
+   "pbf": "https://download.openstreetmap.fr/extracts/africa/spain/canarias.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/africa/spain/canarias.poly",
+   "bbox": [
+    -18.18,
+    27.62,
+    -13.31,
+    29.435
+   ],
+   "area_km2": 10098,
+   "source": "osmfr"
+  },
+  {
+   "id": "ES-cantabria",
+   "country": "ES",
+   "country_name": "Spain",
+   "name": "Cantabria",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/spain/cantabria.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/spain/cantabria.poly",
+   "bbox": [
+    -4.87,
+    42.74,
+    -3.13,
+    43.535
+   ],
+   "area_km2": 6396,
+   "source": "osmfr"
+  },
+  {
+   "id": "ES-castilla_y_leon",
+   "country": "ES",
+   "country_name": "Spain",
+   "name": "Castilla y León",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/spain/castilla_y_leon.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/spain/castilla_y_leon.poly",
+   "bbox": [
+    -7.095,
+    40.065,
+    -1.755,
+    43.26
+   ],
+   "area_km2": 98869,
+   "source": "osmfr"
+  },
+  {
+   "id": "ES-castilla_la_mancha",
+   "country": "ES",
+   "country_name": "Spain",
+   "name": "Castilla-La Mancha",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/spain/castilla_la_mancha.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/spain/castilla_la_mancha.poly",
+   "bbox": [
+    -5.425,
+    38.0,
+    -0.895,
+    41.35
+   ],
+   "area_km2": 83448,
+   "source": "osmfr"
+  },
+  {
+   "id": "ES-catalunya",
+   "country": "ES",
+   "country_name": "Spain",
+   "name": "Catalunya / Catalonia",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/spain/catalunya.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/spain/catalunya.poly",
+   "bbox": [
+    0.14,
+    40.505,
+    3.34,
+    42.88
+   ],
+   "area_km2": 34420,
+   "source": "osmfr"
+  },
+  {
+   "id": "ES-ceuta",
+   "country": "ES",
+   "country_name": "Spain",
+   "name": "Ceuta",
+   "pbf": "https://download.openstreetmap.fr/extracts/africa/spain/ceuta.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/africa/spain/ceuta.poly",
+   "bbox": [
+    -5.426,
+    35.867,
+    -5.274,
+    35.922
+   ],
+   "area_km2": 34,
+   "source": "osmfr"
+  },
+  {
+   "id": "ES-comunidad_de_madrid",
+   "country": "ES",
+   "country_name": "Spain",
+   "name": "Comunidad de Madrid",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/spain/comunidad_de_madrid.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/spain/comunidad_de_madrid.poly",
+   "bbox": [
+    -4.6,
+    39.865,
+    -3.035,
+    41.185
+   ],
+   "area_km2": 9283,
+   "source": "osmfr"
+  },
+  {
+   "id": "ES-comunitat_valenciana",
+   "country": "ES",
+   "country_name": "Spain",
+   "name": "Comunitat Valenciana",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/spain/comunitat_valenciana.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/spain/comunitat_valenciana.poly",
+   "bbox": [
+    -1.55,
+    37.825,
+    0.71,
+    40.81
+   ],
+   "area_km2": 25687,
+   "source": "osmfr"
+  },
+  {
+   "id": "ES-euskadi",
+   "country": "ES",
+   "country_name": "Spain",
+   "name": "Euskadi / País Vasco",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/spain/euskadi.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/spain/euskadi.poly",
+   "bbox": [
+    -3.47,
+    42.45,
+    -1.71,
+    43.475
+   ],
+   "area_km2": 8786,
+   "source": "osmfr"
+  },
+  {
+   "id": "ES-extremadura",
+   "country": "ES",
+   "country_name": "Spain",
+   "name": "Extremadura",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/spain/extremadura.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/spain/extremadura.poly",
+   "bbox": [
+    -7.56,
+    37.92,
+    -4.63,
+    40.505
+   ],
+   "area_km2": 43997,
+   "source": "osmfr"
+  },
+  {
+   "id": "ES-galicia",
+   "country": "ES",
+   "country_name": "Spain",
+   "name": "Galicia",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/spain/galicia.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/spain/galicia.poly",
+   "bbox": [
+    -9.32,
+    41.785,
+    -6.715,
+    43.81
+   ],
+   "area_km2": 32436,
+   "source": "osmfr"
+  },
+  {
+   "id": "ES-illes_balears",
+   "country": "ES",
+   "country_name": "Spain",
+   "name": "Illes Balears",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/spain/illes_balears.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/spain/illes_balears.poly",
+   "bbox": [
+    1.135,
+    38.62,
+    4.35,
+    40.115
+   ],
+   "area_km2": 6821,
+   "source": "osmfr"
+  },
+  {
+   "id": "ES-la_rioja",
+   "country": "ES",
+   "country_name": "Spain",
+   "name": "La Rioja",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/spain/la_rioja.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/spain/la_rioja.poly",
+   "bbox": [
+    -3.155,
+    41.9,
+    -1.66,
+    42.66
+   ],
+   "area_km2": 6016,
+   "source": "osmfr"
+  },
+  {
+   "id": "ES-melilla",
+   "country": "ES",
+   "country_name": "Spain",
+   "name": "Melilla",
+   "pbf": "https://download.openstreetmap.fr/extracts/africa/spain/melilla.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/africa/spain/melilla.poly",
+   "bbox": [
+    -4.32,
+    35.15,
+    -2.4,
+    35.34
+   ],
+   "area_km2": 119,
+   "source": "osmfr"
+  },
+  {
+   "id": "ES-comunidad_foral_de_navarra",
+   "country": "ES",
+   "country_name": "Spain",
+   "name": "Navarra",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/spain/comunidad_foral_de_navarra.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/spain/comunidad_foral_de_navarra.poly",
+   "bbox": [
+    -2.52,
+    41.89,
+    -0.705,
+    43.335
+   ],
+   "area_km2": 11749,
+   "source": "osmfr"
+  },
+  {
+   "id": "ES-region_de_murcia",
+   "country": "ES",
+   "country_name": "Spain",
+   "name": "Región de Murcia",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/spain/region_de_murcia.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/spain/region_de_murcia.poly",
+   "bbox": [
+    -2.365,
+    37.355,
+    -0.625,
+    38.775
+   ],
+   "area_km2": 12587,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-blekinge",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Blekinge",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/blekinge.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/blekinge.poly",
+   "bbox": [
+    14.37,
+    55.725,
+    16.245,
+    56.525
+   ],
+   "area_km2": 7659,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-dalarna",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Dalarna",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/dalarna.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/dalarna.poly",
+   "bbox": [
+    12.12,
+    59.835,
+    16.725,
+    62.285
+   ],
+   "area_km2": 31924,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-gavleborg",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Gavleborg",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/gavleborg.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/gavleborg.poly",
+   "bbox": [
+    14.425,
+    60.17,
+    18.145,
+    62.365
+   ],
+   "area_km2": 26447,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-gotland",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Gotland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/gotland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/gotland.poly",
+   "bbox": [
+    17.565,
+    56.68,
+    19.755,
+    58.62
+   ],
+   "area_km2": 16258,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-halland",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Halland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/halland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/halland.poly",
+   "bbox": [
+    11.34,
+    56.305,
+    13.71,
+    57.615
+   ],
+   "area_km2": 10178,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-jamtland",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Jamtland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/jamtland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/jamtland.poly",
+   "bbox": [
+    11.955,
+    61.545,
+    17.02,
+    65.14
+   ],
+   "area_km2": 56002,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-jonkoping",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Jonkoping",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/jonkoping.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/jonkoping.poly",
+   "bbox": [
+    13.055,
+    56.865,
+    15.685,
+    58.21
+   ],
+   "area_km2": 12832,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-kalmar",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Kalmar",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/kalmar.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/kalmar.poly",
+   "bbox": [
+    15.315,
+    55.895,
+    17.54,
+    58.16
+   ],
+   "area_km2": 21839,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-kronoberg",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Kronoberg",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/kronoberg.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/kronoberg.poly",
+   "bbox": [
+    13.28,
+    56.34,
+    15.855,
+    57.26
+   ],
+   "area_km2": 10448,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-norrbotten",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Norrbotten",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/norrbotten.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/norrbotten.poly",
+   "bbox": [
+    15.355,
+    64.88,
+    24.2,
+    69.08
+   ],
+   "area_km2": 114752,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-orebro",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Orebro",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/orebro.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/orebro.poly",
+   "bbox": [
+    14.265,
+    58.625,
+    15.82,
+    60.13
+   ],
+   "area_km2": 10471,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-ostergotland",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Ostergotland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/ostergotland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/ostergotland.poly",
+   "bbox": [
+    14.4,
+    57.68,
+    17.595,
+    59.04
+   ],
+   "area_km2": 15797,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-skane",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Skane",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/skane.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/skane.poly",
+   "bbox": [
+    12.07,
+    55.115,
+    14.74,
+    56.575
+   ],
+   "area_km2": 18832,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-sodermanland",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Sodermanland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/sodermanland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/sodermanland.poly",
+   "bbox": [
+    15.595,
+    58.375,
+    18.125,
+    59.55
+   ],
+   "area_km2": 9775,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-stockholm",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Stockholm",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/stockholm.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/stockholm.poly",
+   "bbox": [
+    17.225,
+    58.465,
+    20.035,
+    60.32
+   ],
+   "area_km2": 17766,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-uppsala",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Uppsala",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/uppsala.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/uppsala.poly",
+   "bbox": [
+    16.67,
+    59.365,
+    19.23,
+    60.96
+   ],
+   "area_km2": 13217,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-varmland",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Varmland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/varmland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/varmland.poly",
+   "bbox": [
+    11.67,
+    58.695,
+    14.495,
+    61.075
+   ],
+   "area_km2": 23227,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-vasterbotten",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Vasterbotten",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/vasterbotten.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/vasterbotten.poly",
+   "bbox": [
+    14.305,
+    63.08,
+    22.11,
+    66.365
+   ],
+   "area_km2": 68971,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-vasternorrland",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Vasternorrland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/vasternorrland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/vasternorrland.poly",
+   "bbox": [
+    14.76,
+    62.065,
+    19.625,
+    64.05
+   ],
+   "area_km2": 29747,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-vastmanland",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Vastmanland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/vastmanland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/vastmanland.poly",
+   "bbox": [
+    15.4,
+    59.18,
+    16.985,
+    60.215
+   ],
+   "area_km2": 6377,
+   "source": "osmfr"
+  },
+  {
+   "id": "SE-vastra_gotaland",
+   "country": "SE",
+   "country_name": "Sweden",
+   "name": "Vastra Gotaland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/sweden/vastra_gotaland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/sweden/vastra_gotaland.poly",
+   "bbox": [
+    10.575,
+    57.125,
+    14.8,
+    59.285
+   ],
+   "area_km2": 36167,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-aargau",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Aargau",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/aargau.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/aargau.poly",
+   "bbox": [
+    7.71,
+    47.133,
+    8.459,
+    47.625
+   ],
+   "area_km2": 1514,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-appenzell_ausserrhoden",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Appenzell Ausserrhoden",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/appenzell_ausserrhoden.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/appenzell_ausserrhoden.poly",
+   "bbox": [
+    9.187,
+    47.243,
+    9.635,
+    47.473
+   ],
+   "area_km2": 298,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-appenzell_innerrhoden",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Appenzell Innerrhoden",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/appenzell_innerrhoden.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/appenzell_innerrhoden.poly",
+   "bbox": [
+    9.306,
+    47.23,
+    9.622,
+    47.448
+   ],
+   "area_km2": 208,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-basel_landschaft",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Basel Landschaft",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/basel_landschaft.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/basel_landschaft.poly",
+   "bbox": [
+    7.321,
+    47.334,
+    7.966,
+    47.568
+   ],
+   "area_km2": 599,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-basel_stadt",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Basel Stadt",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/basel_stadt.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/basel_stadt.poly",
+   "bbox": [
+    7.551,
+    47.515,
+    7.698,
+    47.605
+   ],
+   "area_km2": 52,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-bern",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Bern",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/bern.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/bern.poly",
+   "bbox": [
+    6.84,
+    46.305,
+    8.475,
+    47.365
+   ],
+   "area_km2": 7196,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-fribourg",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Fribourg",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/fribourg.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/fribourg.poly",
+   "bbox": [
+    6.738,
+    46.434,
+    7.384,
+    47.011
+   ],
+   "area_km2": 1819,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-geneva",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Geneva",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/geneva.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/geneva.poly",
+   "bbox": [
+    5.952,
+    46.125,
+    6.314,
+    46.369
+   ],
+   "area_km2": 329,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-glarus",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Glarus",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/glarus.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/glarus.poly",
+   "bbox": [
+    8.867,
+    46.792,
+    9.257,
+    47.178
+   ],
+   "area_km2": 740,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-grisons",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Grisons",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/grisons.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/grisons.poly",
+   "bbox": [
+    8.63,
+    46.15,
+    10.51,
+    47.085
+   ],
+   "area_km2": 8308,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-jura",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Jura",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/jura.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/jura.poly",
+   "bbox": [
+    6.837,
+    47.146,
+    7.562,
+    47.508
+   ],
+   "area_km2": 950,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-lucerne",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Lucerne",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/lucerne.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/lucerne.poly",
+   "bbox": [
+    7.832,
+    46.771,
+    8.518,
+    47.291
+   ],
+   "area_km2": 1589,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-neuchatel",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Neuchatel",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/neuchatel.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/neuchatel.poly",
+   "bbox": [
+    6.429,
+    46.843,
+    7.092,
+    47.17
+   ],
+   "area_km2": 866,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-nidwalden",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Nidwalden",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/nidwalden.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/nidwalden.poly",
+   "bbox": [
+    8.215,
+    46.768,
+    8.579,
+    47.024
+   ],
+   "area_km2": 325,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-obwalden",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Obwalden",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/obwalden.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/obwalden.poly",
+   "bbox": [
+    8.038,
+    46.749,
+    8.511,
+    46.984
+   ],
+   "area_km2": 549,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-saint_gallen",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Saint Gallen",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/saint_gallen.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/saint_gallen.poly",
+   "bbox": [
+    8.792,
+    46.869,
+    9.678,
+    47.554
+   ],
+   "area_km2": 2564,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-schaffhausen",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Schaffhausen",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/schaffhausen.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/schaffhausen.poly",
+   "bbox": [
+    8.401,
+    47.548,
+    8.88,
+    47.812
+   ],
+   "area_km2": 361,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-schwyz",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Schwyz",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/schwyz.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/schwyz.poly",
+   "bbox": [
+    8.385,
+    46.881,
+    9.009,
+    47.227
+   ],
+   "area_km2": 978,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-solothurn",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Solothurn",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/solothurn.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/solothurn.poly",
+   "bbox": [
+    7.336,
+    47.071,
+    8.035,
+    47.507
+   ],
+   "area_km2": 926,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-thurgau",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Thurgau",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/thurgau.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/thurgau.poly",
+   "bbox": [
+    8.664,
+    47.372,
+    9.511,
+    47.699
+   ],
+   "area_km2": 1100,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-ticino",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Ticino",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/ticino.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/ticino.poly",
+   "bbox": [
+    8.378,
+    45.814,
+    9.164,
+    46.636
+   ],
+   "area_km2": 2932,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-uri",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Uri",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/uri.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/uri.poly",
+   "bbox": [
+    8.393,
+    46.524,
+    8.962,
+    46.997
+   ],
+   "area_km2": 1152,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-valais",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Valais",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/valais.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/valais.poly",
+   "bbox": [
+    6.75,
+    45.84,
+    8.5,
+    46.675
+   ],
+   "area_km2": 6137,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-vaud",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Vaud",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/vaud.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/vaud.poly",
+   "bbox": [
+    6.05,
+    46.165,
+    7.27,
+    47.005
+   ],
+   "area_km2": 4145,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-zug",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Zug",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/zug.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/zug.poly",
+   "bbox": [
+    8.391,
+    47.077,
+    8.705,
+    47.252
+   ],
+   "area_km2": 270,
+   "source": "osmfr"
+  },
+  {
+   "id": "CH-zurich",
+   "country": "CH",
+   "country_name": "Switzerland",
+   "name": "Zurich",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/switzerland/zurich.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/switzerland/zurich.poly",
+   "bbox": [
+    8.354,
+    47.155,
+    8.989,
+    47.698
+   ],
+   "area_km2": 1829,
+   "source": "osmfr"
+  },
+  {
+   "id": "TR-aegean",
+   "country": "TR",
+   "country_name": "Turkey",
+   "name": "Aegean",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/turkey/aegean.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/turkey/aegean.poly",
+   "bbox": [
+    26.15,
+    36.215,
+    31.75,
+    39.9
+   ],
+   "area_km2": 102942,
+   "source": "osmfr"
+  },
+  {
+   "id": "TR-black_sea",
+   "country": "TR",
+   "country_name": "Turkey",
+   "name": "Black Sea",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/turkey/black_sea.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/turkey/black_sea.poly",
+   "bbox": [
+    30.52,
+    39.8,
+    42.63,
+    42.34
+   ],
+   "area_km2": 152979,
+   "source": "osmfr"
+  },
+  {
+   "id": "TR-central_anatolia",
+   "country": "TR",
+   "country_name": "Turkey",
+   "name": "Central Anatolia",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/turkey/central_anatolia.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/turkey/central_anatolia.poly",
+   "bbox": [
+    29.97,
+    36.415,
+    38.79,
+    41.115
+   ],
+   "area_km2": 194530,
+   "source": "osmfr"
+  },
+  {
+   "id": "TR-eastern_anatolia",
+   "country": "TR",
+   "country_name": "Turkey",
+   "name": "Eastern Anatolia",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/turkey/eastern_anatolia.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/turkey/eastern_anatolia.poly",
+   "bbox": [
+    37.24,
+    36.945,
+    44.84,
+    41.62
+   ],
+   "area_km2": 155263,
+   "source": "osmfr"
+  },
+  {
+   "id": "TR-marmara",
+   "country": "TR",
+   "country_name": "Turkey",
+   "name": "Marmara",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/turkey/marmara.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/turkey/marmara.poly",
+   "bbox": [
+    25.55,
+    39.05,
+    31.035,
+    42.125
+   ],
+   "area_km2": 98889,
+   "source": "osmfr"
+  },
+  {
+   "id": "TR-mediterranean",
+   "country": "TR",
+   "country_name": "Turkey",
+   "name": "Mediterranean",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/turkey/mediterranean.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/turkey/mediterranean.poly",
+   "bbox": [
+    29.17,
+    35.785,
+    37.77,
+    38.63
+   ],
+   "area_km2": 115826,
+   "source": "osmfr"
+  },
+  {
+   "id": "TR-southeastern_anatolia",
+   "country": "TR",
+   "country_name": "Turkey",
+   "name": "Southeastern Anatolia",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/turkey/southeastern_anatolia.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/turkey/southeastern_anatolia.poly",
+   "bbox": [
+    36.425,
+    36.61,
+    43.52,
+    38.735
+   ],
+   "area_km2": 80004,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-cherkasy_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Cherkasy Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/cherkasy_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/cherkasy_oblast.poly",
+   "bbox": [
+    29.585,
+    48.43,
+    32.915,
+    50.25
+   ],
+   "area_km2": 22916,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-chernihiv_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Chernihiv Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/chernihiv_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/chernihiv_oblast.poly",
+   "bbox": [
+    30.46,
+    50.325,
+    33.52,
+    52.4
+   ],
+   "area_km2": 33834,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-chernivtsi_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Chernivtsi Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/chernivtsi_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/chernivtsi_oblast.poly",
+   "bbox": [
+    24.89,
+    47.705,
+    27.555,
+    48.695
+   ],
+   "area_km2": 9448,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-crimea",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Crimea",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/crimea.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/crimea.poly",
+   "bbox": [
+    32.18,
+    44.165,
+    36.7,
+    46.25
+   ],
+   "area_km2": 43701,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-dnipropetrovsk_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Dnipropetrovsk Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/dnipropetrovsk_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/dnipropetrovsk_oblast.poly",
+   "bbox": [
+    32.94,
+    47.435,
+    36.955,
+    49.215
+   ],
+   "area_km2": 34318,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-donetsk_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Donetsk Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/donetsk_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/donetsk_oblast.poly",
+   "bbox": [
+    36.52,
+    46.67,
+    39.11,
+    49.255
+   ],
+   "area_km2": 30974,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-ivano_frankivsk_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Ivano Frankivsk Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/ivano-frankivsk_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/ivano-frankivsk_oblast.poly",
+   "bbox": [
+    23.525,
+    47.705,
+    25.675,
+    49.57
+   ],
+   "area_km2": 15313,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-kharkiv_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Kharkiv Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/kharkiv_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/kharkiv_oblast.poly",
+   "bbox": [
+    34.835,
+    48.51,
+    38.115,
+    50.48
+   ],
+   "area_km2": 33373,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-kherson_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Kherson Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/kherson_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/kherson_oblast.poly",
+   "bbox": [
+    31.14,
+    45.735,
+    35.49,
+    47.62
+   ],
+   "area_km2": 36013,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-khmelnytskyi_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Khmelnytskyi Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/khmelnytskyi_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/khmelnytskyi_oblast.poly",
+   "bbox": [
+    26.115,
+    48.43,
+    27.92,
+    50.615
+   ],
+   "area_km2": 22097,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-kiev",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Kiev",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/kiev.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/kiev.poly",
+   "bbox": [
+    30.232,
+    50.209,
+    30.832,
+    50.595
+   ],
+   "area_km2": 913,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-kiev_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Kiev Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/kiev_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/kiev_oblast.poly",
+   "bbox": [
+    29.25,
+    49.16,
+    32.18,
+    51.575
+   ],
+   "area_km2": 31161,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-kirovohrad_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Kirovohrad Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/kirovohrad_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/kirovohrad_oblast.poly",
+   "bbox": [
+    29.73,
+    47.73,
+    33.915,
+    49.265
+   ],
+   "area_km2": 26805,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-luhansk_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Luhansk Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/luhansk_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/luhansk_oblast.poly",
+   "bbox": [
+    37.82,
+    47.805,
+    40.245,
+    50.11
+   ],
+   "area_km2": 28538,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-lviv_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Lviv Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/lviv_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/lviv_oblast.poly",
+   "bbox": [
+    22.625,
+    48.7,
+    25.445,
+    50.67
+   ],
+   "area_km2": 23284,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-mykolaiv_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Mykolaiv Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/mykolaiv_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/mykolaiv_oblast.poly",
+   "bbox": [
+    30.185,
+    46.325,
+    33.205,
+    48.25
+   ],
+   "area_km2": 27461,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-odessa_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Odessa Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/odessa_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/odessa_oblast.poly",
+   "bbox": [
+    28.195,
+    45.035,
+    31.325,
+    48.255
+   ],
+   "area_km2": 42478,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-poltava_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Poltava Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/poltava_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/poltava_oblast.poly",
+   "bbox": [
+    32.065,
+    48.705,
+    35.51,
+    50.575
+   ],
+   "area_km2": 30573,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-rivne_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Rivne Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/rivne_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/rivne_oblast.poly",
+   "bbox": [
+    25.065,
+    49.985,
+    27.755,
+    51.97
+   ],
+   "area_km2": 21849,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-sevastopol",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Sevastopol",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/sevastopol.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/sevastopol.poly",
+   "bbox": [
+    33.087,
+    44.187,
+    33.929,
+    44.945
+   ],
+   "area_km2": 3189,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-sumy_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Sumy Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/sumy_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/sumy_oblast.poly",
+   "bbox": [
+    32.925,
+    50.09,
+    35.715,
+    52.385
+   ],
+   "area_km2": 25802,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-ternopil_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Ternopil Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/ternopil_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/ternopil_oblast.poly",
+   "bbox": [
+    24.7,
+    48.485,
+    26.465,
+    50.285
+   ],
+   "area_km2": 15187,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-vinnytsia_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Vinnytsia Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/vinnytsia_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/vinnytsia_oblast.poly",
+   "bbox": [
+    27.35,
+    48.045,
+    30.04,
+    49.91
+   ],
+   "area_km2": 28159,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-volyn_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Volyn Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/volyn_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/volyn_oblast.poly",
+   "bbox": [
+    23.585,
+    50.265,
+    26.125,
+    51.99
+   ],
+   "area_km2": 21612,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-zakarpattia_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Zakarpattia Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/zakarpattia_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/zakarpattia_oblast.poly",
+   "bbox": [
+    22.115,
+    47.875,
+    24.645,
+    49.115
+   ],
+   "area_km2": 13981,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-zaporizhia_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Zaporizhia Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/zaporizhia_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/zaporizhia_oblast.poly",
+   "bbox": [
+    34.12,
+    46.125,
+    37.27,
+    48.165
+   ],
+   "area_km2": 33370,
+   "source": "osmfr"
+  },
+  {
+   "id": "UA-zhytomyr_oblast",
+   "country": "UA",
+   "country_name": "Ukraine",
+   "name": "Zhytomyr Oblast",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/ukraine/zhytomyr_oblast.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/ukraine/zhytomyr_oblast.poly",
+   "bbox": [
+    27.17,
+    49.565,
+    29.755,
+    51.7
+   ],
+   "area_km2": 31629,
+   "source": "osmfr"
+  },
+  {
+   "id": "GB-england",
+   "country": "GB",
+   "country_name": "United Kingdom",
+   "name": "England",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/united_kingdom/england.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/united_kingdom/england.poly",
+   "bbox": [
+    -6.725,
+    49.655,
+    2.11,
+    55.935
+   ],
+   "area_km2": 184649,
+   "source": "osmfr"
+  },
+  {
+   "id": "GB-northern_ireland",
+   "country": "GB",
+   "country_name": "United Kingdom",
+   "name": "Northern Ireland",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/united_kingdom/northern_ireland.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/united_kingdom/northern_ireland.poly",
+   "bbox": [
+    -8.195,
+    53.85,
+    -5.06,
+    55.465
+   ],
+   "area_km2": 20545,
+   "source": "osmfr"
+  },
+  {
+   "id": "VA",
+   "country": "VA",
+   "country_name": "Vatican City",
+   "name": "Vatican City",
+   "pbf": "https://download.openstreetmap.fr/extracts/europe/vatican_city.osm.pbf",
+   "poly": "https://download.openstreetmap.fr/polygons/europe/vatican_city.poly",
+   "bbox": [
+    12.311,
+    41.727,
+    12.67,
+    42.065
+   ],
+   "area_km2": 20,
+   "source": "osmfr"
+  }
+ ]
+}

@@ -9,10 +9,11 @@ from pathlib import Path
 
 from . import download
 
-REMOTE = 'https://downloads.lastbook.org/manifest-v1.json'
+from engine import distribution   # noqa: E402
+REMOTE = distribution.MANIFEST_URL
 SHA = re.compile(r'^[0-9a-f]{64}$')
-LIBRARY_HOSTS = frozenset({'downloads.lastbook.org'})   # packs and state maps come from Lastbook's own download site only
-MODEL_HOSTS = frozenset({'huggingface.co'})             # the model from Hugging Face only (it redirects to its own CDN hosts)
+LIBRARY_HOSTS = distribution.LIBRARY_HOSTS   # packs and maps come from the publisher's own download site only (Lastbook's: downloads.lastbook.org)
+MODEL_HOSTS = distribution.MODEL_HOSTS       # the model from Hugging Face only (it redirects to its own CDN hosts)
 
 
 def _from(url, hosts, allowed):
@@ -69,7 +70,7 @@ def validate(m, allowed=None):
         for x in m.get(key) or []:
             if not isinstance(x, dict) or not isinstance(x.get('id'), str) or not NAME.match(x['id']):
                 return None
-            if key == 'address_indexes' and not re.fullmatch(r'[A-Z]{2}(-[A-Z0-9]{1,3})?', x['id']):   # 'CA', or 'ES-CT' (ISO 3166-2)
+            if key == 'address_indexes' and not re.fullmatch(r'[A-Z]{2}(-[A-Za-z0-9_]{1,48})?', x['id']):   # 'CA', or a region of tools/regions: 'ES-catalunya'
                 return None
             files = []
             for f in x.get('files') or []:
@@ -80,7 +81,10 @@ def validate(m, allowed=None):
             available = bool(x.get('available')) and bool(files) and all(f['size'] for f in files)
             if available and not _int(x.get('installed_bytes')):
                 return None
+            # country groups the maps in setup (country first, then region); Lastbook's own manifest has none: its maps are US states
+            cc = x.get('country') if isinstance(x.get('country'), str) and re.fullmatch(r'[A-Z]{2}', x.get('country') or '') else 'US'
             entries.append({'id': x['id'], 'title': str(x.get('title') or x['id']), 'kind': str(x.get('kind') or 'state'),
+                         'country': cc, 'country_name': str(x.get('country_name') or ('United States' if cc == 'US' else cc)),
                          'includes': str(x.get('includes') or ''),
                          'installed_bytes': x.get('installed_bytes') if _int(x.get('installed_bytes')) else None,
                          'download_bytes': sum(f['size'] for f in files), 'available': available, 'files': files})

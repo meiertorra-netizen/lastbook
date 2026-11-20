@@ -24,6 +24,9 @@ ROOTS = ['GTS Root R1', 'GTS Root R3', 'GTS Root R4', 'GlobalSign ECC Root CA - 
          'Amazon Root CA 1', 'Amazon Root CA 2', 'Amazon Root CA 3', 'Amazon Root CA 4',
          'Starfield Services Root Certificate Authority - G2']
 OUT = Path(__file__).resolve().parents[1] / 'engine' / 'setup' / 'roots.pem'
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from engine import distribution   # noqa: E402  (a fork's download site may need more roots: its distribution.json names them)
+ROOTS = ROOTS + [r for r in distribution.EXTRA_ROOTS if r not in ROOTS]
 BLOCK = re.compile(r'# Label: "([^"]+)"\n(?:#[^\n]*\n)*(-----BEGIN CERTIFICATE-----\n.*?\n-----END CERTIFICATE-----)', re.S)
 
 

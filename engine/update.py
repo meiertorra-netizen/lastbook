@@ -23,11 +23,12 @@ from pathlib import Path
 
 from engine.setup import download
 
-METADATA = 'https://downloads.lastbook.org/app-v1.json'
-HOST = 'downloads.lastbook.org'
+from engine import distribution   # noqa: E402
+METADATA = distribution.UPDATE_URL
+HOST = distribution.UPDATE_HOST
 VER = re.compile(r'^\d{1,6}(\.\d{1,6}){0,3}$')    # Windows builds have 5 digits (10.0.26200)
 MAX_BODY = 4096
-WEBSITE = 'lastbook.org'
+WEBSITE = distribution.WEBSITE
 
 OFFLINE = 'Lastbook could not reach the internet. Everything else in Lastbook still works without it; try again when you are online.'
 
