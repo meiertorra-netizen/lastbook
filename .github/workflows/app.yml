@@ -194,6 +194,20 @@ jobs:
           & $py -I -m ensurepip --upgrade
           & $py -I -m pip install --disable-pip-version-check --no-input -r packaging/requirements_app.txt certifi
           if ($LASTEXITCODE -ne 0) { throw 'Could not install the pinned application requirements' }
+          # The signed Microsoft package is unpacked only after NuGet verifies it.  The app build
+          # independently pins the three shipped DLL hashes, so both package provenance and payload
+          # identity are checked before PyInstaller can consume them.
+          $webViewPkg = Join-Path $env:RUNNER_TEMP 'microsoft.web.webview2.1.0.3856.49.nupkg'
+          Invoke-WebRequest -UseBasicParsing -Uri 'https://api.nuget.org/v3-flatcontainer/microsoft.web.webview2/1.0.3856.49/microsoft.web.webview2.1.0.3856.49.nupkg' -OutFile $webViewPkg
+          nuget verify -Signatures $webViewPkg
+          if ($LASTEXITCODE -ne 0) { throw 'The Microsoft.Web.WebView2 NuGet package signature is invalid' }
+          $webViewExtract = Join-Path $tools 'webview2-package'
+          Expand-Archive -Force $webViewPkg $webViewExtract
+          $webViewOut = Join-Path $env:GITHUB_WORKSPACE 'app\webview2'
+          New-Item -ItemType Directory -Force -Path $webViewOut | Out-Null
+          Copy-Item (Join-Path $webViewExtract 'lib\net462\Microsoft.Web.WebView2.Core.dll') $webViewOut
+          Copy-Item (Join-Path $webViewExtract 'lib\net462\Microsoft.Web.WebView2.WinForms.dll') $webViewOut
+          Copy-Item (Join-Path $webViewExtract 'build\native\x64\WebView2Loader.dll') $webViewOut
           "TOOLS_WIN=$tools" | Add-Content -Path $env:GITHUB_ENV
           "PY_WIN=$py" | Add-Content -Path $env:GITHUB_ENV
       - name: The fork's name, download site and TLS roots
