@@ -70,8 +70,8 @@ jobs:
       - name: The fork's name, download site and TLS roots
         run: |
           cp packaging/fork/distribution.json distribution.json
-          python3 -m pip install --quiet certifi
-          python3 -I -B packaging/setup_roots.py "$(python3 -c 'import certifi; print(certifi.where())')"
+          python3 -m venv "$RUNNER_TEMP/roots" && "$RUNNER_TEMP/roots/bin/pip" install --quiet certifi   # Mozilla's list from PyPI
+          "$RUNNER_TEMP/roots/bin/python" -I -B packaging/setup_roots.py "$("$RUNNER_TEMP/roots/bin/python" -c 'import certifi; print(certifi.where())')"
       - name: The local AI runner (llama.cpp, Metal)
         run: |
           brew list ninja >/dev/null 2>&1 || brew install ninja
@@ -123,11 +123,13 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq build-essential git cmake ninja-build glslc libvulkan-dev spirv-headers \
-            python3 python3-venv python3-pil python3-certifi dpkg-dev binutils file gcc pkg-config libgstreamer1.0-dev
+            python3 python3-venv python3-pil dpkg-dev binutils file gcc pkg-config libgstreamer1.0-dev
       - name: The fork's name, download site and TLS roots
         run: |
           cp packaging/fork/distribution.json distribution.json
-          /usr/bin/python3 -I -B packaging/setup_roots.py "$(/usr/bin/python3 -c 'import certifi; print(certifi.where())')"
+          # PyPI's certifi (Mozilla's list with its labels), not Ubuntu's, which points at /etc/ssl/certs
+          /usr/bin/python3 -m venv "$RUNNER_TEMP/roots" && "$RUNNER_TEMP/roots/bin/pip" install --quiet certifi
+          "$RUNNER_TEMP/roots/bin/python" -I -B packaging/setup_roots.py "$("$RUNNER_TEMP/roots/bin/python" -c 'import certifi; print(certifi.where())')"
       - name: The local AI runner (llama.cpp, Vulkan and CPU)
         run: bash packaging/llm/build_llm_linux.sh
       - name: The .deb
