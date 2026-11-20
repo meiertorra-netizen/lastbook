@@ -158,9 +158,12 @@ class Manifest:
     def address_index(self, state):
         return next((x for x in self.current.get('address_indexes', []) if x['id'] == state), None)
 
+    def models(self):
+        """The models offered, best first (the manifest's order): setup takes the first that fits the computer."""
+        return [m for m in self.current['models'] if m['available']]
+
     def model(self, mid=None):
-        ms = [m for m in self.current['models'] if m['available']]
-        return next((m for m in ms if mid in (None, m['id'])), None)
+        return next((m for m in self.models() if mid in (None, m['id'])), None)
 
     def public(self):
         strip = lambda f: {k: v for k, v in f.items() if k != 'url'}

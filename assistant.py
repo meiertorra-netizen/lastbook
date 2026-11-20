@@ -571,14 +571,19 @@ def _local_round(msgs, tools, cancelled, wrote, set_state):
     segs = _fit_prompt(msgs, tools, llm_local)
     if segs is None:
         return 'The question and its sources were too long for the local AI. Start a new chat or ask a shorter question.'
-    text, sent = [''], [0]
+    text = ['']
 
-    def piece(t):   # the person sees the answer as it is written, up to the first tool call, which is markup
+    shown = ['']
+
+    def piece(t):   # the person sees the answer as it is written, up to the first tool call, which is markup, and never the thought
         text[0] += t
-        visible = text[0].split('<|tool_call>', 1)[0].lstrip()
-        if len(visible) > sent[0]:
-            wrote(visible[sent[0]:])
-            sent[0] = len(visible)
+        visible = llm_local.hide_thinking(text[0].split('<|tool_call>', 1)[0]).lstrip()
+        if not visible.startswith(shown[0]):      # what was shown turned out to be thought (a smaller model's stray close)
+            wrote(None)
+            shown[0] = ''
+        if len(visible) > len(shown[0]):
+            wrote(visible[len(shown[0]):])
+            shown[0] = visible
     try:
         done = LOCAL.generate(segs, ROUND_TOKENS, cancelled, piece)
     except RuntimeError as e:
@@ -587,7 +592,7 @@ def _local_round(msgs, tools, cancelled, wrote, set_state):
         return 'stopped'
     content, found = llm_local.parse_calls(text[0])
     calls = {i: {'id': f'call_{i}', 'name': name, 'args': json.dumps(args)} for i, (name, args) in enumerate(found)} if tools else {}
-    return content.strip(), calls
+    return llm_local.hide_thinking(content).strip(), calls
 
 
 def _fit_prompt(msgs, tools, llm_local):
@@ -676,6 +681,9 @@ def chat(messages, about, emit, cancelled):
     first = {'at': None}
 
     def wrote(piece):
+        if piece is None:          # the text so far was not answer after all (llm_local.hide_thinking): the page clears it
+            emit({'type': 'reset'})
+            return
         set_state('writing')
         first['at'] = first['at'] or time.time() - t0
         emit({'type': 'delta', 'text': piece})

@@ -1,4 +1,8 @@
-"""The optional local AI: Gemma 4 26B A4B run on this computer by lastbook-llm, a program of ours that speaks only through pipes.
+"""The optional local AI: a Gemma 4 model run on this computer by lastbook-llm, a program of ours that speaks only through pipes.
+
+MODELS lists the Gemma 4 files Lastbook knows, best first. All of them share Gemma 4's prompt format and tool-call notation, so
+everything below the list is the same for each. The app runs the best one it finds that fits this computer's memory: the
+26B A4B where there is room, a smaller one on an 8 to 16 GB computer.
 
 Nothing here opens a socket or reaches past this computer. The model is a file the person downloads from the website, outside the
 app. Lastbook finds it inside the selected library or an explicitly configured model folder, checks the published file, asks llama.cpp
@@ -22,11 +26,31 @@ from pathlib import Path
 
 from engine import paths
 
-FILE = 'gemma-4-26B-A4B-it-UD-Q4_K_M.gguf'
-SIZE = 16_947_541_728
-SHA256 = 'f2c28b3dc4776931ac6f879e11f203dec637ea0f14267a86ec8f6165f63f293f'
-NAME = 'Gemma 4 26B A4B (Unsloth 4-bit, UD-Q4_K_M)'
-SOURCE = 'unsloth/gemma-4-26B-A4B-it-GGUF, revision c099eb48e663fd284577b04978a94ffccb261841'
+MODELS = [   # best first; each is checked by size and SHA-256 before it is used
+    {'id': 'gemma-4-26b-a4b', 'title': 'Gemma 4 26B A4B', 'file': 'gemma-4-26B-A4B-it-UD-Q4_K_M.gguf', 'size': 16_947_541_728,
+     'sha256': 'f2c28b3dc4776931ac6f879e11f203dec637ea0f14267a86ec8f6165f63f293f',
+     'name': 'Gemma 4 26B A4B (Unsloth 4-bit, UD-Q4_K_M)',
+     'source': 'unsloth/gemma-4-26B-A4B-it-GGUF, revision c099eb48e663fd284577b04978a94ffccb261841'},
+    {'id': 'gemma-4-26b-a4b-q3', 'title': 'Gemma 4 26B A4B, 3-bit', 'file': 'gemma-4-26B-A4B-it-UD-IQ3_S.gguf', 'size': 11_289_671_136,
+     'sha256': '878be93f9c238ea853b3fd1eb602637ce3cf1cddea56dc345d9a7bf2d6093e29',
+     'name': 'Gemma 4 26B A4B (Unsloth 3-bit, UD-IQ3_S)',
+     'source': 'unsloth/gemma-4-26B-A4B-it-GGUF, revision c099eb48e663fd284577b04978a94ffccb261841'},
+    {'id': 'gemma-4-12b', 'title': 'Gemma 4 12B', 'file': 'gemma-4-12b-it-UD-Q4_K_XL.gguf', 'size': 7_366_423_360,
+     'sha256': '90fd944d227e9d9b68e7e2c7d5b57b79d4c66ed521b0919fbbd932cf834f6f8e',
+     'name': 'Gemma 4 12B (Unsloth 4-bit, UD-Q4_K_XL)',
+     'source': 'unsloth/gemma-4-12b-it-GGUF, revision fc034cfff751157913579611efad8462ac1be606'},
+    {'id': 'gemma-4-e4b', 'title': 'Gemma 4 E4B', 'file': 'gemma-4-E4B-it-UD-Q4_K_XL.gguf', 'size': 5_126_306_944,
+     'sha256': '3cf61de12daa015ee0f7b68e7b7c541405bf220e1e942bad8b47cab827d7df80',
+     'name': 'Gemma 4 E4B (Unsloth 4-bit, UD-Q4_K_XL)',
+     'source': 'unsloth/gemma-4-E4B-it-GGUF, revision bfc15c382204943c3a8fff0c750b94ae2364d7a3'},
+    {'id': 'gemma-4-e2b', 'title': 'Gemma 4 E2B', 'file': 'gemma-4-E2B-it-UD-Q4_K_XL.gguf', 'size': 3_184_496_736,
+     'sha256': 'b52f438017efaec5debf1c0d8be690571e212a07c312f1102bbce927258cfc32',
+     'name': 'Gemma 4 E2B (Unsloth 4-bit, UD-Q4_K_XL)',
+     'source': 'unsloth/gemma-4-E2B-it-GGUF, revision 0314792d7f1f7e229411f620751375812bb9faf2'},
+]
+BY_FILE = {m['file']: m for m in MODELS}
+# The first (largest) model, under the names the rest of Lastbook and its packaging read.
+FILE, SIZE, SHA256, NAME, SOURCE = (MODELS[0][k] for k in ('file', 'size', 'sha256', 'name', 'source'))
 CTX = 16384               # tokens the model holds: the system prompt, sources, the conversation and the answer
 RESERVE = 2.5 * 2**30     # memory left for the system and the rest of Lastbook beyond what llama.cpp measures for the model
 IDLE_STOP = int(os.environ.get('LASTBOOK_AI_IDLE_S') or 15 * 60)   # seconds without a question before the model is stopped, to give its memory back
@@ -84,9 +108,10 @@ def mark_checked(path, sha256):
     """For setup: it has just checked this file's SHA-256 while downloading it, so the AI need not read it again.
     sha256 is the digest setup computed; it must be the published one, or nothing is recorded."""
     p = Path(path)
-    if p.name != FILE or p.stat().st_size != SIZE or str(sha256).lower() != SHA256:
+    m = BY_FILE.get(p.name)
+    if not m or p.stat().st_size != m['size'] or str(sha256).lower() != m['sha256']:
         raise ValueError('not the model file')
-    LOCAL.saved['checked'] = _stamp(p)
+    LOCAL.saved.setdefault('checked_files', {})[m['file']] = _stamp(p)
     _save(LOCAL.saved)
 
 
@@ -110,6 +135,7 @@ class Local:
         self.gen_lock = threading.Lock()       # one answer at a time: the model holds one conversation
         self.state, self.pct, self.message = 'absent', None, ''
         self.path, self.fit, self.ready_info = None, None, None
+        self.model = MODELS[0]                 # the one found (or, until one is, the one to look for)
         self.proc, self.events, self.last_used = None, None, 0
         self.next_id = 0
         self.failed_loads = 0     # loads in a row that ended before the model was ready
@@ -121,10 +147,12 @@ class Local:
     def status(self):
         with self.lock:
             fit = self.fit or {}
-            return {'name': NAME, 'file': FILE, 'size': SIZE, 'state': self.state, 'pct': self.pct, 'message': self.message,
+            m = self.model
+            return {'name': m['name'], 'file': m['file'], 'size': m['size'], 'model': m['id'], 'state': self.state, 'pct': self.pct, 'message': self.message,
                     'found_at': self.path and _folder_name(self.path), 'enabled': self.enabled(), 'runtime': bool(self.runner),
                     'needs_bytes': fit.get('needs'), 'ram_total': fit.get('ram_total'), 'placement': fit.get('placement'),
-                    'load_s': (self.ready_info or {}).get('load_s'), 'places': [_folder_name(p) for p in places()[:6]]}
+                    'load_s': (self.ready_info or {}).get('load_s'), 'places': [_folder_name(p) for p in places()[:6]],
+                    'known': [{'id': k['id'], 'title': k['title'], 'file': k['file'], 'size': k['size']} for k in MODELS]}
 
     def enabled(self):
         return self.saved.get('enabled', True)
@@ -144,7 +172,9 @@ class Local:
         threading.Thread(target=self._idle_watch, daemon=True, name='local-ai-idle').start()
 
     def discover(self):
-        """Find the file, check it if it has not been checked as it is now, measure the fit. Safe to call again (Look again)."""
+        """Find a known model file, check it if it has not been checked as it is now, measure the fit. The best file that fits
+        this computer is the one used: a larger one that does not fit gives way to a smaller one also found. Safe to call
+        again (Look again)."""
         with self.lock:
             if self.state in ('checking', 'measuring', 'loading', 'ready'):
                 return
@@ -155,41 +185,56 @@ class Local:
                 self.state, self.message = 'error', 'This copy of Lastbook has no local AI runtime.'
                 return
             self.state, self.pct, self.message = 'absent', None, ''
-        found, wrong = None, None
-        for folder in places():
-            p = folder / FILE
-            try:
-                if not p.is_file():
+        found, wrong = [], None
+        for m in MODELS:
+            for folder in places():
+                p = folder / m['file']
+                try:
+                    if not p.is_file():
+                        continue
+                    size = p.stat().st_size
+                except OSError:
                     continue
-                size = p.stat().st_size
-            except OSError:
-                continue
-            if size == SIZE:
-                found = p
-                break
-            wrong = wrong or (p, size)
+                if size == m['size']:
+                    found.append((m, p))
+                    break
+                wrong = wrong or (m, p, size)
         if not found:
             with self.lock:
                 if wrong:
-                    p, size = wrong
-                    done = size < SIZE
+                    m, p, size = wrong
+                    self.model = m
                     self.state = 'wrong'
-                    self.message = (f'The file in {_folder_name(p)} is {_gb(size)} of {_gb(SIZE)}. ' +
-                                    ('The download may not have finished.' if done else 'It is not the file Lastbook expects.'))
+                    self.message = (f'The file in {_folder_name(p)} is {_gb(size)} of {_gb(m["size"])}. ' +
+                                    ('The download may not have finished.' if size < m['size'] else 'It is not the file Lastbook expects.'))
                 else:
                     self.state = 'absent'
             return
-        stamp = _stamp(found)
-        if self.saved.get('checked') != stamp:
-            if not self._check(found):
-                return
-            self.saved['checked'] = stamp
-            _save(self.saved)
-        with self.lock:
-            self.path = found
-        self._measure()
+        too_big = None
+        for m, p in found:
+            with self.lock:
+                self.model, self.path, self.fit = m, None, None
+            stamp = _stamp(p)
+            checked = self.saved.get('checked_files') or {}
+            if checked.get(m['file']) != stamp and not (m is MODELS[0] and self.saved.get('checked') == stamp):
+                if not self._check(p):
+                    continue
+                self.saved.setdefault('checked_files', {})[m['file']] = stamp
+                _save(self.saved)
+            with self.lock:
+                self.path = p
+            self._measure()
+            with self.lock:
+                if self.state != 'too_big':
+                    return
+                too_big = too_big or (m, p, self.fit, self.message)
+        if too_big:     # none fits: report the best one, which is what the person most likely downloaded
+            with self.lock:
+                self.model, self.path, self.fit, self.message = too_big
+                self.state = 'too_big'
 
     def _check(self, p):
+        m = self.model
         with self.lock:
             self.state, self.pct, self.message = 'checking', 0, ''
         h = hashlib.sha256()
@@ -199,12 +244,12 @@ class Local:
                 while chunk := f.read(8 * 2**20):
                     h.update(chunk)
                     done += len(chunk)
-                    self.pct = int(done * 100 / SIZE)
+                    self.pct = int(done * 100 / m['size'])
         except OSError as e:
             with self.lock:
                 self.state, self.pct, self.message = 'wrong', None, f'Lastbook could not read the model file ({type(e).__name__}).'
             return False
-        if h.hexdigest() != SHA256:
+        if h.hexdigest() != m['sha256']:
             with self.lock:
                 self.state, self.pct = 'wrong', None
                 self.message = f'The file in {_folder_name(p)} has the right size but different contents. Download it again.'
@@ -227,7 +272,7 @@ class Local:
                 if out is not None:
                     print('local AI: measure output:', out.stdout[-2000:], out.stderr[-3000:], flush=True)
                 return
-            self.fit = judge(fit)
+            self.fit = judge(fit, self.model['size'])
             print('local AI: fit', json.dumps(self.fit), flush=True)
             if self.fit['fits']:
                 self.state, self.message = 'stopped', ''
@@ -426,7 +471,7 @@ def _apple_silicon_linux(tree='/proc/device-tree'):
             return False
 
 
-def judge(fit):
+def judge(fit, size=None):
     """Does the whole of it fit this computer? llama.cpp's fit places the model on the graphics memory it finds and counts
     the rest as the computer's own memory, which it takes to be unlimited. So the computer's own memory is checked here:
     on a Mac the two are one memory; on Windows the part placed on the graphics card is not in it."""
@@ -436,7 +481,7 @@ def judge(fit):
     unified = sys.platform == 'darwin' or _apple_silicon_linux()
     # Windows: weights left in the mapped file (not on a graphics card, not repacked) are outside llama.cpp's count, yet in use
     # while answering. Measured with no GPU: the fit said 9.6 GB, the program held 16.5 to 26 GB.
-    mapped = 0 if unified else max(0, SIZE - sum(m.get('model') or 0 for m in fit.get('memory') or []))
+    mapped = 0 if unified else max(0, (size or SIZE) - sum(m.get('model') or 0 for m in fit.get('memory') or []))
     in_ram = dev + host if unified else host + mapped
     needs = in_ram + RESERVE
     placement = [{'device': m.get('desc') or m.get('name'), 'bytes': m['model'] + m['context'] + m['compute'], 'free': m.get('free')} for m in devices]
@@ -600,6 +645,18 @@ def _text(m):
 
 def _strip_thinking(text):
     return re.sub(r'<\|channel>.*?<channel\|>', '', text, flags=re.S).strip()
+
+
+def hide_thinking(text):
+    """What of a model turn is answer, not thought. Closed thought blocks go; an unfinished one hides what follows it until
+    it closes. Smaller Gemma 4 models (E2B, E4B) often think in plain text after a tool response and only then close a
+    channel they never opened ("The user asks... <channel|>The answer"): all before that stray close is thought too."""
+    t = re.sub(r'<\|channel>.*?<channel\|>', '', text, flags=re.S)
+    if '<|channel>' in t:
+        t = t.split('<|channel>', 1)[0]
+    if '<channel|>' in t:
+        t = t.rsplit('<channel|>', 1)[1]
+    return t
 
 
 def size_of(segments):
