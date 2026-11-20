@@ -115,9 +115,16 @@ class SetupChoice(unittest.TestCase):
         return api.Setup.ai_fit(fake, hw)
 
     def test_the_best_model_that_fits_is_offered(self):
-        self.assertEqual(self.fit(32)['model'], 'big')
-        self.assertEqual(self.fit(16)['model'], 'mid')
-        self.assertEqual(self.fit(10)['model'], 'small')
+        self.assertEqual(self.fit(48)['model'], 'big')
+        self.assertEqual(self.fit(24)['model'], 'mid')
+        self.assertEqual(self.fit(14)['model'], 'small')
+
+    def test_the_default_leaves_room_on_shared_memory(self):
+        f = self.fit(16)                       # mid needs 11.7 GB of 17.2: it fits, but more than two thirds; small is the default
+        self.assertEqual(f['model'], 'small')
+        self.assertEqual([(o['model'], o['fits'], o['recommended']) for o in f['options']],
+                         [('big', False, False), ('mid', True, False), ('small', True, True)])
+        self.assertEqual(self.fit(10)['model'], 'small')   # nothing is roomy: the largest that fits
 
     def test_options_say_which_fit(self):
         self.assertEqual([(o['model'], o['fits']) for o in self.fit(16)['options']], [('big', False), ('mid', True), ('small', True)])

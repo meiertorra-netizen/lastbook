@@ -89,8 +89,8 @@
     const fits = fitting(), m = model();
     if (has || fits.length < 2 || !m) return '';
     return `<div class="s-modelpick"><label class="s-maplabel" for="modelSel">Model</label>
-      <select id="modelSel" class="s-select">${fits.map(o => `<option value="${esc(o.model)}"${o.model === m.id ? ' selected' : ''}>${esc(o.title)} — ${size(o.size)} download, needs about ${size(o.needs_bytes)} of memory</option>`).join('')}</select>
-      <p class="s-hint">Larger models answer better; smaller ones are faster and leave more memory free.</p></div>`;
+      <select id="modelSel" class="s-select">${fits.map(o => `<option value="${esc(o.model)}"${o.model === m.id ? ' selected' : ''}>${esc(o.title)}${o.recommended ? ' (recommended)' : ''} — ${size(o.size)} download, needs about ${size(o.needs_bytes)} of memory</option>`).join('')}</select>
+      <p class="s-hint">The recommended model leaves memory for the rest of this computer. Larger ones answer better but are slower; smaller ones are faster.</p></div>`;
   }
   const packById = id => packs().find(p => p.id === id);
   function packNeedsInstall(pack) {

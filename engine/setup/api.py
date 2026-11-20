@@ -96,6 +96,9 @@ class _Item:
         self.t, self.at, self.rate = time.time(), d.get('bytes_done', 0), 0.0
 
 
+COMFORT = 0.67     # the share of shared memory the default model may need (ai_fit)
+
+
 class Setup:
     def __init__(self, mode, settings_dir, default_parent, current=None, manifest=None, allowed=None, context=None,
                  on_finish=None, pick_folder=None, look_for_libraries=None, home=None, llm_local=None, default_why=None):
@@ -358,8 +361,15 @@ class Setup:
             else:
                 fit = hardware.estimate_ai(hw['ram_bytes'], hw['gpus'], hw['unified_memory'], m['memory_bytes'])
             options.append({**fit, 'model': m['id'], 'title': m['title'], 'size': m['size']})
-        chosen = next((o for o in options if o['fits']), options[-1])    # none fits: the smallest one's need is the useful one to say
-        return {**chosen, 'options': [{k: o[k] for k in ('model', 'title', 'size', 'fits', 'needs_bytes')} for o in options]}
+        # The default leaves room: where the model shares the computer's memory (a Mac, or no graphics card), the best model
+        # needing at most COMFORT of that memory, so the rest of the computer keeps working and a Mac's GPU, which by default may
+        # use only about two thirds to three quarters of it, holds the whole model. Larger ones that fit stay in the options.
+        shared = hw.get('unified_memory') or not hw.get('gpus')
+        ram = hw.get('ram_bytes') or 0
+        roomy = lambda o: o['fits'] and (not shared or (o.get('needs_bytes') or 0) <= COMFORT * ram)
+        chosen = next((o for o in options if roomy(o)), None) or next((o for o in options if o['fits']), options[-1])   # none fits: the smallest one's need is the useful one to say
+        return {**chosen, 'options': [{**{k: o[k] for k in ('model', 'title', 'size', 'fits', 'needs_bytes')}, 'recommended': o is chosen}
+                                      for o in options]}
 
     def _measure(self, path, mid=None):
         try:
