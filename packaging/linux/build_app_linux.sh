@@ -45,7 +45,11 @@ mkdir -p "$OPT"
 
 # web/ and content/ as they ship, and what setup can install (the same steps as the Mac and Windows builds)
 python3 -I -B "$ROOT/packaging/ship_app_files.py" "$OUT/ship"
-python3 -I -B "$ROOT/packaging/release_manifest.py" --packs "$ROOT/derived/release/manifest-v1.json" --out "$OUT/ship/setup/manifest-v1.json"
+if [ -n "${LASTBOOK_MANIFEST:-}" ]; then   # a fork's build (GitHub Actions): packaging/fork_manifest.py's
+  mkdir -p "$OUT/ship/setup" && cp "$LASTBOOK_MANIFEST" "$OUT/ship/setup/manifest-v1.json"
+else
+  python3 -I -B "$ROOT/packaging/release_manifest.py" --packs "$ROOT/derived/release/manifest-v1.json" --out "$OUT/ship/setup/manifest-v1.json"
+fi
 if [ "${SKIP_TLS_GATE:-}" != 1 ]; then   # release gate: every download host verifies through engine/setup/roots.pem only
   python3 -I -B "$ROOT/packaging/check_tls_roots.py" || { echo "TLS roots gate failed: refresh engine/setup/roots.pem (packaging/setup_roots.py)" >&2; exit 1; }
 fi

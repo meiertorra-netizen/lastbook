@@ -1,0 +1,161 @@
+# Builds the fork's desktop app: a macOS .dmg (Apple silicon) and an Ubuntu 24.04 .deb, with the local AI runner, the
+# fork's name and download site (packaging/fork/distribution.json) and the region maps on the "maps" release.
+#
+# macOS signing and notarization happen when these repository secrets exist (Settings -> Secrets and variables -> Actions):
+#   MACOS_CERT_P12         base64 of the "Developer ID Application" certificate exported with its key (.p12)
+#   MACOS_CERT_PASSWORD    the .p12's password
+#   MACOS_SIGN_IDENTITY    e.g. "Developer ID Application: Your Name (TEAMID)"
+#   NOTARY_KEY_P8          base64 of an App Store Connect API key (.p8), role Developer
+#   NOTARY_KEY_ID, NOTARY_ISSUER   that key's id and its issuer id
+# Without them the .dmg is unsigned (macOS asks people to allow it in Privacy & Security).
+#
+# A push of a tag v* (or "publish" on a manual run) publishes the files on a release of that name, with app-v1.json,
+# which the app's "Check for updates" reads (engine/update.py, distribution.json's update_url).
+name: App
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version shown in the file names'
+        required: true
+        default: '1.1.13-fork'
+      publish:
+        description: 'Publish a release with the built files'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+env:
+  VERSION: ${{ github.ref_type == 'tag' && github.ref_name || inputs.version }}
+  GH_TOKEN: ${{ github.token }}
+
+jobs:
+  manifest:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Lastbook's packs, our models, the regions on the maps release
+        run: |
+          mkdir -p regions
+          gh release download maps --pattern '*.json' --dir regions --clobber || echo "no maps release yet: US state maps only"
+          rm -f regions/manifest-v1.json
+          cp packaging/fork/distribution.json distribution.json
+          python -I -B packaging/fork_manifest.py --regions regions --out manifest-v1.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: manifest
+          path: manifest-v1.json
+
+  macos:
+    needs: manifest
+    runs-on: macos-14
+    timeout-minutes: 120
+    env:
+      HAS_SIGNING: ${{ secrets.MACOS_CERT_P12 != '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: manifest
+          path: ${{ runner.temp }}
+      - uses: astral-sh/setup-uv@v5
+      - name: The fork's name, download site and TLS roots
+        run: |
+          cp packaging/fork/distribution.json distribution.json
+          python3 -m pip install --quiet certifi
+          python3 -I -B packaging/setup_roots.py "$(python3 -c 'import certifi; print(certifi.where())')"
+      - name: The local AI runner (llama.cpp, Metal)
+        run: |
+          brew list ninja >/dev/null 2>&1 || brew install ninja
+          bash packaging/llm/build_llm_macos.sh
+      - name: The app
+        env:
+          LASTBOOK_MANIFEST: ${{ runner.temp }}/manifest-v1.json
+        run: bash packaging/build_app_macos.sh
+      - name: Signing keychain
+        if: ${{ env.HAS_SIGNING == 'true' }}
+        env:
+          MACOS_CERT_P12: ${{ secrets.MACOS_CERT_P12 }}
+          MACOS_CERT_PASSWORD: ${{ secrets.MACOS_CERT_PASSWORD }}
+        run: |
+          KC="$RUNNER_TEMP/sign.keychain-db"; PW="$(uuidgen)"
+          security create-keychain -p "$PW" "$KC"
+          security set-keychain-settings -lut 21600 "$KC"
+          security unlock-keychain -p "$PW" "$KC"
+          echo "$MACOS_CERT_P12" | base64 --decode > "$RUNNER_TEMP/cert.p12"
+          security import "$RUNNER_TEMP/cert.p12" -k "$KC" -P "$MACOS_CERT_PASSWORD" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple: -s -k "$PW" "$KC"
+          security list-keychains -d user -s "$KC" $(security list-keychains -d user | tr -d '"')
+          rm "$RUNNER_TEMP/cert.p12"
+      - name: Sign, pack and notarize
+        env:
+          MACOS_SIGN_IDENTITY: ${{ env.HAS_SIGNING == 'true' && secrets.MACOS_SIGN_IDENTITY || '' }}
+          NOTARY_KEY_P8: ${{ secrets.NOTARY_KEY_P8 }}
+          NOTARY_KEY_ID: ${{ secrets.NOTARY_KEY_ID }}
+          NOTARY_ISSUER: ${{ secrets.NOTARY_ISSUER }}
+        run: |
+          if [ -n "$NOTARY_KEY_P8" ]; then echo "$NOTARY_KEY_P8" | base64 --decode > "$RUNNER_TEMP/notary.p8"; export NOTARY_KEY="$RUNNER_TEMP/notary.p8"; fi
+          bash packaging/sign_macos.sh "$(cat derived/app-build/mac/latest-bundle.txt)" dist "$VERSION"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macos
+          path: dist/*.dmg
+
+  linux:
+    needs: manifest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: manifest
+          path: ${{ runner.temp }}
+      - name: Build tools
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq build-essential git cmake ninja-build glslc libvulkan-dev spirv-headers \
+            python3 python3-venv python3-pil python3-certifi dpkg-dev binutils file gcc pkg-config libgstreamer1.0-dev
+      - name: The fork's name, download site and TLS roots
+        run: |
+          cp packaging/fork/distribution.json distribution.json
+          /usr/bin/python3 -I -B packaging/setup_roots.py "$(/usr/bin/python3 -c 'import certifi; print(certifi.where())')"
+      - name: The local AI runner (llama.cpp, Vulkan and CPU)
+        run: bash packaging/llm/build_llm_linux.sh
+      - name: The .deb
+        env:
+          LASTBOOK_MANIFEST: ${{ runner.temp }}/manifest-v1.json
+        run: |
+          export PATH="/usr/bin:$PATH"
+          bash packaging/linux/build_app_linux.sh
+          mkdir -p dist && cp -L derived/app-build/linux/latest.deb "dist/$(python3 -c "import json; print(json.load(open('distribution.json'))['app_name'].replace(' ', '-'))")-$VERSION-ubuntu24.04-amd64.deb"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux
+          path: dist/*.deb
+
+  release:
+    needs: [macos, linux]
+    if: ${{ github.ref_type == 'tag' || inputs.publish }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Publish
+        run: |
+          APP_VERSION="$(grep -oE "version='[0-9.]+'" packaging/lastbook_macos.spec | head -1 | cut -d"'" -f2)"
+          printf '{"version": 1, "mac": {"version": "%s", "min_os": "14.0"}, "linux": {"version": "%s", "min_os": "24.04"}}\n' "$APP_VERSION" "$APP_VERSION" > dist/app-v1.json
+          (cd dist && sha256sum * > SHA256SUMS.txt)
+          gh release view "$VERSION" >/dev/null 2>&1 || gh release create "$VERSION" --title "$VERSION" --notes "Built by the App workflow from $GITHUB_SHA."
+          gh release upload "$VERSION" dist/* --clobber

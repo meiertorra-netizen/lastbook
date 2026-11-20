@@ -1,0 +1,111 @@
+# Builds detailed maps for European regions (tools/regions/europe.json) and publishes them on a GitHub release, with the
+# manifest the app's setup reads (packaging/fork_manifest.py). Run it from the Actions tab: "Region maps" -> Run workflow.
+#   regions: a country code (ES), region ids (ES-catalunya ES-la_rioja), or all
+# Each region: about 2-10 minutes and a few hundred MB (tools/build_region.py). Regions already on the release are rebuilt.
+name: Region maps
+
+on:
+  workflow_dispatch:
+    inputs:
+      regions:
+        description: 'Country code (ES), region ids separated by spaces, or "all"'
+        required: true
+        default: 'ES'
+      tag:
+        description: 'Release that holds the maps and manifest-v1.json'
+        required: true
+        default: 'maps'
+      batch:
+        description: 'Regions per job'
+        required: true
+        default: '2'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: region-maps
+  cancel-in-progress: false
+
+env:
+  TAG: ${{ inputs.tag }}
+  GH_TOKEN: ${{ github.token }}
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      batches: ${{ steps.plan.outputs.batches }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: plan
+        env:
+          REGIONS: ${{ inputs.regions }}
+          BATCH: ${{ inputs.batch }}
+        run: |
+          python3 - <<'EOF'
+          import json, os
+          regions = json.load(open('tools/regions/europe.json'))['regions']
+          want = os.environ['REGIONS'].split()
+          ids = [r['id'] for r in regions if 'all' in want or r['id'] in want or r['country'] in want]
+          missing = [w for w in want if w != 'all' and w not in {r['id'] for r in regions} and w not in {r['country'] for r in regions}]
+          if missing:
+              raise SystemExit(f'not in tools/regions/europe.json: {missing}')
+          # big regions alone, the rest in batches
+          area = {r['id']: r['area_km2'] or 0 for r in regions}
+          n = max(1, int(os.environ['BATCH']))
+          big = [i for i in ids if area[i] > 60000]
+          rest = [i for i in ids if area[i] <= 60000]
+          batches = [[i] for i in big] + [rest[k:k + n] for k in range(0, len(rest), n)]
+          if len(batches) > 256:
+              raise SystemExit(f'{len(batches)} jobs: raise the batch size')
+          print(len(ids), 'regions in', len(batches), 'jobs')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write('batches=' + json.dumps([' '.join(b) for b in batches]) + '\n')
+          EOF
+      - name: The release for the maps
+        run: |
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --prerelease --title "Region maps" \
+            --notes "Detailed region maps and the setup manifest (manifest-v1.json), built by the Region maps workflow."
+
+  build:
+    needs: plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        batch: ${{ fromJson(needs.plan.outputs.batches) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install osmium numpy tifffile imagecodecs duckdb
+      - name: Build and publish
+        run: |
+          for id in ${{ matrix.batch }}; do
+            python tools/build_region.py "$id" --work "$RUNNER_TEMP/work" --out "$RUNNER_TEMP/dist" \
+              --base-url "https://github.com/$GITHUB_REPOSITORY/releases/download/$TAG"
+            gh release upload "$TAG" "$RUNNER_TEMP"/dist/* --clobber
+            rm -rf "$RUNNER_TEMP/dist" "$RUNNER_TEMP/work"
+          done
+
+  manifest:
+    needs: build
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Every region on the release, into the manifest
+        run: |
+          mkdir -p "$RUNNER_TEMP/regions"
+          gh release download "$TAG" --pattern '*.json' --dir "$RUNNER_TEMP/regions" --clobber
+          rm -f "$RUNNER_TEMP/regions/manifest-v1.json"
+          cp packaging/fork/distribution.json distribution.json
+          python -I -B packaging/fork_manifest.py --regions "$RUNNER_TEMP/regions" --out "$RUNNER_TEMP/manifest-v1.json"
+          gh release upload "$TAG" "$RUNNER_TEMP/manifest-v1.json" --clobber
