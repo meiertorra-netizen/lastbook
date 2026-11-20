@@ -70,7 +70,7 @@
   /* ------------------------------------------------------------ state */
   let S = null;           // GET state
   let view = 'choose';
-  let choice = { pack: null, ai: false, map: null, country: null };   // map: the selected state or region id; country: its country
+  let choice = { pack: null, ai: false, map: null, country: null, model: null };   // map: the selected state or region id; country: its country
   let folder = '';
   let shortfall = null;   // the answer to a start that had no room: {need_bytes, free_bytes}
   let pollT = 0;
@@ -80,9 +80,18 @@
 
   const packs = () => (S.manifest && S.manifest.packs) || [];
   // The model that matters here: the one this library has, else the one setup chose for this computer (the best that fits), else the first offered.
-  const model = () => { const ms = (S.manifest && S.manifest.models) || [], c = cur(), want = (c && c.model) || (S.hardware && S.hardware.ai && S.hardware.ai.model);
+  const model = () => { const ms = (S.manifest && S.manifest.models) || [], c = cur(), want = (c && c.model) || choice.model || (S.hardware && S.hardware.ai && S.hardware.ai.model);
     return ms.find(x => x.id === want) || ms[0] || null };
   const cur = () => S.current || null;
+  /* Every model that fits this computer (setup's ai_fit options, best first): the person may pick a smaller, faster one. */
+  const fitting = () => (((S.hardware || {}).ai || {}).options || []).filter(o => o.fits);
+  function modelPicker(has) {
+    const fits = fitting(), m = model();
+    if (has || fits.length < 2 || !m) return '';
+    return `<div class="s-modelpick"><label class="s-maplabel" for="modelSel">Model</label>
+      <select id="modelSel" class="s-select">${fits.map(o => `<option value="${esc(o.model)}"${o.model === m.id ? ' selected' : ''}>${esc(o.title)} — ${size(o.size)} download, needs about ${size(o.needs_bytes)} of memory</option>`).join('')}</select>
+      <p class="s-hint">Larger models answer better; smaller ones are faster and leave more memory free.</p></div>`;
+  }
   const packById = id => packs().find(p => p.id === id);
   function packNeedsInstall(pack) {
     if (!pack) return false;
@@ -226,7 +235,7 @@
         ? `<label class="s-opt s-ai"><input type="checkbox" id="aiBox"${choice.ai || has ? ' checked' : ''}${has ? ' disabled' : ''}>
             <span class="s-opt-in"><span class="s-opt-h"><b>Local AI</b> <span class="muted">${esc(m.title)}</span>${has ? '<span class="s-badge here">Installed</span>' : (S.recommend || {}).ai && !c ? '<span class="s-badge rec">Suggested</span>' : '<span class="s-badge">Optional</span>'}</span>
             <small>Answers questions from the library, in plain words. Works offline.</small>
-            <span class="s-sizes">${has ? 'On this computer' : foundFor('model') ? '<span>Already downloaded</span>' : `<span>About ${size(m.size)} download</span>`}</span></span></label>`
+            <span class="s-sizes">${has ? 'On this computer' : foundFor('model') ? '<span>Already downloaded</span>' : `<span>About ${size(m.size)} download</span>`}</span></span></label>${modelPicker(has)}`
         : `<div class="s-opt s-ai off" role="group" aria-label="Local AI"><span class="s-opt-in"><span class="s-opt-h"><b>Local AI</b><span class="s-badge later">Not for this computer</span></span>
             <small>${esc((S.hardware.ai && S.hardware.ai.why) || 'This computer does not have enough memory for it.')}</small></span></div>`;
     }
@@ -253,6 +262,7 @@
       <p class="s-note" id="haveNote" hidden></p>`;
     main.querySelectorAll('input[name=pack]').forEach(r => r.onchange = () => { choice.pack = r.value; shortfall = null; mapSection(); summary() });
     const box = $('#aiBox'); if (box && !box.disabled) box.onchange = () => { choice.ai = box.checked; shortfall = null; summary() };
+    const ms = $('#modelSel'); if (ms) ms.onchange = e => { choice.model = e.target.value; choice.ai = true; shortfall = null; chooseView() };
     main.querySelectorAll('[data-use]').forEach(b => b.onclick = () => useFile((S.found || [])[+b.dataset.use].path, b));
     $('#start').onclick = start;
     if ($('#toManage')) $('#toManage').onclick = () => go('manage');
