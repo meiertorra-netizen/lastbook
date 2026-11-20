@@ -1380,7 +1380,10 @@ def water_places(q, limit=10, near=None):
         away = ''
         if near:
             km = haversine(near[0], near[1], lat, lon)[0]
-            away = f" · {km / 1.609:,.0f} mi away" if km >= 1.6 else ' · nearby'
+            if region_meta().get('units') == 'metric':
+                away = f" · {km:,.0f} km away" if km >= 1 else ' · nearby'
+            else:
+                away = f" · {km / 1.609:,.0f} mi away" if km >= 1.6 else ' · nearby'
         out.append((score, {'name': name, 'kind': {'dam': 'Dam', 'reservoir': 'Reservoir', 'lake': 'Lake'}[kind],
                             'detail': (where or 'United States') + extra + away, 'lat': lat, 'lon': lon, 'source': 'water', 'onMap': True}))
     out.sort(key=lambda t: -t[0])
@@ -1622,20 +1625,20 @@ def map_info():
     region = region_meta()      # a map built outside the US names its own sources (tools/build_osm_region.py)
     if region.get('datasets'):
         geo = region['datasets']
-    for key in ('credit', 'data_as_of'):
+    for key in ('credit', 'data_as_of', 'units'):
         if region.get(key):
             extra[key] = region[key]
     return {**extra, 'meta': meta, 'datasets': geo, 'national': {k: v for k, v in national_status().items() if k not in ('source', 'database')}, 'version': data_version(), 'aerial_detail': detail, 'aerial_rev': rev, 'terrain_circle': tdetail}
 
 
 def region_meta():
-    """'credit', 'data_as_of' and 'datasets' from national.sqlite's meta, for a map set that brings its own (outside
+    """'credit', 'data_as_of', 'datasets' and 'units' from national.sqlite's meta, for a map set that brings its own (outside
     the US); {} for the US maps, whose credits stay those written in web/map.js and pack_datasets."""
     path = HERE / 'derived/geo/national.sqlite'
     try:
         db = sqlite3.connect(ro_uri(path), uri=True)
         try:
-            meta = dict(db.execute("SELECT key,value FROM meta WHERE key IN ('credit','data_as_of','datasets')").fetchall())
+            meta = dict(db.execute("SELECT key,value FROM meta WHERE key IN ('credit','data_as_of','datasets','units')").fetchall())
         finally:
             db.close()
     except sqlite3.Error:

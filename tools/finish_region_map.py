@@ -40,6 +40,7 @@ def main():
     ap.add_argument('--title', required=True)
     ap.add_argument('--credit', required=True, help='the credit line shown on the map')
     ap.add_argument('--zip', help='folder to write the two zips to')
+    ap.add_argument('--units', choices=('metric', 'imperial'), default='metric', help='units the map shows first (default: metric)')
     a = ap.parse_args()
     out = Path(a.out)
     geo = out / 'derived/geo'
@@ -66,7 +67,7 @@ def main():
             datasets.append({'label': f'Street addresses ({source})', 'status': f'{int(meta(index).get("count", 0)):,} addresses'})
     db = sqlite3.connect(geo / 'national.sqlite')
     db.executemany('INSERT OR REPLACE INTO meta VALUES (?,?)', [('credit', a.credit), ('datasets', json.dumps(datasets)),
-                                                                ('region', a.code), ('title', a.title)])
+                                                                ('region', a.code), ('title', a.title), ('units', a.units)])
     db.commit()
     db.close()
 

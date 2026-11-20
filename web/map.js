@@ -73,13 +73,19 @@ const MapView = (() => {
 
   const load = (k, d) => { try { return JSON.parse(localStorage.getItem('sg.' + k)) ?? d } catch { return d } };
   const save = (k, v) => { try { localStorage.setItem('sg.' + k, JSON.stringify(v)) } catch { } };
+  // Units: what the person chose (a click on the scale bar), else what the map says (a map built outside the US says
+  // metric), else miles and feet only where the language setting is American English. window.lbMetric lets the 3D view agree.
+  let mapUnits = null;
+  const metric = () => { const u = load('mapUnits', null) || mapUnits; return u ? u === 'metric' : !/-(US|LR|MM)$/i.test(navigator.language || 'en-US') };
+  window.lbMetric = metric;
   const lon2x = (lon, z) => (lon + 180) / 360 * 2 ** z;
   const lat2y = (lat, z) => { const s = Math.sin(Math.max(-85, Math.min(85, lat)) * Math.PI / 180); return (0.5 - Math.log((1 + s) / (1 - s)) / (4 * Math.PI)) * 2 ** z };
   const x2lon = (x, z) => x / 2 ** z * 360 - 180;
   const y2lat = (y, z) => { const n = Math.PI - 2 * Math.PI * y / 2 ** z; return 180 / Math.PI * Math.atan(Math.sinh(n)) };
   const escH = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const $ = id => document.getElementById(id);
-  const dist = km => km < 1.6 ? Math.round(km * 1000) + ' m' : (km / 1.609).toFixed(km < 16 ? 1 : 0) + ' mi';
+  const dist = km => metric() ? (km < 1 ? Math.round(km * 1000) + ' m' : km.toFixed(km < 10 ? 1 : 0) + ' km')
+    : km < 1.6 ? Math.round(km * 1000) + ' m' : (km / 1.609).toFixed(km < 16 ? 1 : 0) + ' mi';
   const kmBetween = (a, b, c, d) => { const r = Math.PI / 180, x = Math.sin((c - a) * r / 2) ** 2 + Math.cos(a * r) * Math.cos(c * r) * Math.sin((d - b) * r / 2) ** 2; return 12742 * Math.asin(Math.sqrt(x)) };
   const sym = (l, size = 22) => `<i class="msym" style="background:${l.col};width:${size}px;height:${size}px">${escH(l.sym)}</i>`;
   const layerOf = cls => BY_CLS[cls] || { sym: '•', col: '#555', label: cls };
@@ -194,6 +200,7 @@ const MapView = (() => {
     if (info.aerial === false) { st.noAerial = true; st.style.aerial = false; $('map-photo')?.remove() }
     // A map built outside the US brings its own credit line and the date its data was taken (tools/build_osm_region.py).
     if (info.credit) { const a = document.querySelector('.mapattr'); if (a) a.textContent = info.credit }
+    if (info.units) mapUnits = info.units;
     if (info.data_as_of) {
       const d = new Date(info.data_as_of), p = document.querySelector('.maphead p');
       if (p && !isNaN(d)) p.textContent = p.textContent.replace(/mapped by [^—]+—/, `mapped by ${d.getUTCDate()} ${d.toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' })} ${d.getUTCFullYear()} —`);
@@ -526,8 +533,17 @@ const MapView = (() => {
     const home = load('mapHome', HOME); if (home) { const [hx, hy] = px(home.lat, home.lon, V); if (hx > -10 && hx < w + 10 && hy > -10 && hy < h + 10) { g.beginPath(); g.arc(hx, hy, 6, 0, 7); g.fillStyle = '#fff'; g.fill(); g.lineWidth = 3; g.strokeStyle = '#1b5e20'; g.stroke() } }
     g.strokeStyle = 'rgba(0,0,0,.3)'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(w / 2 - 7, h / 2); g.lineTo(w / 2 + 7, h / 2); g.moveTo(w / 2, h / 2 - 7); g.lineTo(w / 2, h / 2 + 7); g.stroke();
     const mpp = 156543.03 * Math.cos(st.lat * Math.PI / 180) / 2 ** st.z;
-    const nice = [10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000, 2000000].find(m => m / mpp > 60) || 100000;
-    const el = $('mscale'); if (el) el.innerHTML = `<span style="display:inline-block;width:${Math.round(nice / mpp)}px;border:2px solid #333;border-top:0;height:6px;vertical-align:middle"></span> ${nice >= 1000 ? nice / 1000 + ' km' : nice + ' m'} · ${(nice / 1609.34 < 1 ? Math.round(nice * 3.281) + ' ft' : (nice / 1609.34).toFixed(nice < 5000 ? 1 : 0) + ' mi')}`;
+    // a round length in the chosen units for the bar; the other system follows it, rounded
+    const M = metric(), steps = M ? [10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000, 2000000]
+      : [...[20, 50, 100, 200, 500, 1000, 2000].map(f => f * 0.3048), ...[1, 2, 5, 10, 20, 50, 100, 200, 500, 1000].map(m => m * 1609.344)];
+    const nice = steps.find(m => m / mpp > 60) || steps[steps.length - 1];
+    const km = nice >= 1000 ? +(nice / 1000).toFixed(nice < 1000 * 10 ? 1 : 0) + ' km' : Math.round(nice) + ' m';
+    const mi = nice < 1609 ? Math.round(nice * 3.28084).toLocaleString() + ' ft' : +(nice / 1609.344).toFixed(nice < 16000 ? 1 : 0) + ' mi';
+    const el = $('mscale'); if (el) {
+      el.innerHTML = `<span style="display:inline-block;width:${Math.round(nice / mpp)}px;border:2px solid #333;border-top:0;height:6px;vertical-align:middle"></span> ${M ? km : mi} · <span class="muted">${M ? mi : km}</span>`;
+      el.title = M ? 'Click to show miles and feet' : 'Click to show kilometres and metres'; el.style.cursor = 'pointer';
+      el.onclick = () => { save('mapUnits', metric() ? 'imperial' : 'metric'); draw(); nearby() };
+    }
     const at = el && el.parentNode.querySelector('.mapattr'); if (at) at.style.maxWidth = Math.max(120, el.parentNode.clientWidth - el.offsetWidth - 34) + 'px';   // the credits wrap before they reach the scale bar, however long it is
   }
 
@@ -590,10 +606,13 @@ const MapView = (() => {
     }
     g.putImageData(img, 0, 0); return t.shade = c;
   }
-  const CONTOUR = [[11, 200, 1000], [12, 100, 500], [13, 40, 200], [15, 20, 100], [16, 5, 25]];  // [from zoom, interval ft, index ft]; 5 ft only on lidar
+  const CONTOUR_FT = [[11, 200, 1000], [12, 100, 500], [13, 40, 200], [15, 20, 100], [16, 5, 25]];  // [from zoom, interval ft, index ft]; 5 ft only on lidar
+  const CONTOUR_M = [[11, 50, 250], [12, 25, 100], [13, 10, 50], [15, 5, 25], [16, 2, 10]];          // the same spacing in round metres
+  const contourRules = () => metric() ? CONTOUR_M : CONTOUR_FT;
   function contours(t, step) {
-    if (t.contours[step]) return t.contours[step];
-    const h = t.h, ft = 3.28084, lines = [];  // marching squares on the 256x256 grid, in feet
+    const M = metric(), key = (M ? 'm' : 'ft') + step;     // a tile keeps both, so switching units redraws without recomputing
+    if (t.contours[key]) return t.contours[key];
+    const h = t.h, ft = M ? 1 : 3.28084, lines = [];  // marching squares on the 256x256 grid, in the chosen unit
     let lo = Infinity, hi = -Infinity; for (let i = 0; i < 65536; i++) { const v = h[i] * ft; if (v < lo) lo = v; if (v > hi) hi = v }
     for (let lev = Math.ceil(lo / step) * step; lev <= hi; lev += step) {
       if (lev <= 0) continue;
@@ -606,9 +625,9 @@ const MapView = (() => {
         const P = { 1: [3, 0], 2: [0, 1], 3: [3, 1], 4: [1, 2], 5: [3, 0, 1, 2], 6: [0, 2], 7: [3, 2], 8: [2, 3], 9: [0, 2], 10: [0, 1, 2, 3], 11: [1, 2], 12: [1, 3], 13: [0, 1], 14: [0, 3] }[idx];
         for (let k = 0; k < P.length; k += 2) { const p = e[P[k]], q = e[P[k + 1]]; seg.push(p[0] + .5, p[1] + .5, q[0] + .5, q[1] + .5) }
       }
-      if (seg.length) lines.push({ lev, index: lev % CONTOUR.find(c => c[1] === step)[2] === 0, seg: new Float32Array(seg) });
+      if (seg.length) lines.push({ lev, index: lev % contourRules().find(c => c[1] === step)[2] === 0, seg: new Float32Array(seg) });
     }
-    return t.contours[step] = lines;
+    return t.contours[key] = lines;
   }
   function terrainLayer(g, V, noRelief) {
     if (!st.style.relief && !st.style.contours) return;
@@ -635,7 +654,7 @@ const MapView = (() => {
       }
       g.restore();
     }
-    const rule = [...CONTOUR].reverse().find(c => st.z >= c[0] && (c[0] < 16 || tz > TZN));
+    const rule = [...contourRules()].reverse().find(c => st.z >= c[0] && (c[0] < 16 || tz > TZN));
     if (st.style.contours && rule) {
       const [, step] = rule, k = ts / 256;
       g.save(); g.lineJoin = 'round';
@@ -656,7 +675,7 @@ const MapView = (() => {
         for (const L of contours(t, step)) { if (!L.index) continue; const a = L.seg;
           for (let i = 0; i < a.length && placed.length < 24; i += 4 * 61) { const x = sx + a[i] * k, y = sy + a[i + 1] * k; if (x < 40 || x > w - 70 || y < 70 || y > h - 50) continue;
             if (placed.some(p => Math.abs(p[0] - x) < 130 && Math.abs(p[1] - y) < 70)) continue; placed.push([x, y]);
-            const s = L.lev.toLocaleString() + ' ft'; g.lineWidth = 3; g.strokeStyle = 'rgba(255,255,255,.85)'; g.strokeText(s, x, y); g.fillStyle = 'rgba(120,76,36,.95)'; g.fillText(s, x, y) } }
+            const s = L.lev.toLocaleString() + (metric() ? ' m' : ' ft'); g.lineWidth = 3; g.strokeStyle = 'rgba(255,255,255,.85)'; g.strokeText(s, x, y); g.fillStyle = 'rgba(120,76,36,.95)'; g.fillText(s, x, y) } }
       }
       g.restore();
     }
@@ -753,7 +772,8 @@ const MapView = (() => {
     }
     return st ? elevAt(lat, lon) : null;
   }
-  const fmtElev = m => `${Math.round(m * 3.28084).toLocaleString()} ft (${Math.round(m).toLocaleString()} m)`;
+  const fmtElev = m => metric() ? `${Math.round(m).toLocaleString()} m (${Math.round(m * 3.28084).toLocaleString()} ft)`
+    : `${Math.round(m * 3.28084).toLocaleString()} ft (${Math.round(m).toLocaleString()} m)`;
 
   // ------------------------------------------------------------------ card ----
   function openCard(html) {
@@ -860,7 +880,7 @@ const MapView = (() => {
       const r = await fetch(`/api/map/near?lat=${st.lat}&lon=${st.lon}&cls=${ks.join(',')}&limit=${Math.max(3, Math.ceil(14 / ks.length))}`).then(r => r.json());
       if (st !== state || serial !== st.serial.near) return;
       box.classList.remove('busy');
-      if (!Array.isArray(r) || !r.length) { box.innerHTML = '<p class="muted small">Nothing from your layers within about 100 miles of the map center.</p>'; return }
+      if (!Array.isArray(r) || !r.length) { box.innerHTML = `<p class="muted small">Nothing from your layers within about ${metric() ? '160 km' : '100 miles'} of the map center.</p>`; return }
       const list = r.sort((a, b) => a.km - b.km).slice(0, 14);
       box.innerHTML = list.map((p, i) => `<button data-i="${i}">${sym(layerOf(p.cls), 24)}<span><b>${escH(unnamed(p))}</b><small>${escH(layerOf(p.cls).label)} · ${dist(p.km)} ${escH(p.dir)}</small>${p.detail ? `<small>${escH(p.detail)}</small>` : ''}</span></button>`).join('');
       box.querySelectorAll('button').forEach(b => b.onclick = () => {
