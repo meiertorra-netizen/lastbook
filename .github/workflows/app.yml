@@ -179,7 +179,7 @@ jobs:
           git clone --quiet --depth 1 --branch vulkan-sdk-1.4.350.1 https://github.com/KhronosGroup/SPIRV-Headers "$tools/spirv-headers"
           if ((git -C "$tools/spirv-headers" rev-parse HEAD) -notlike 'ad9184e7*') { throw 'SPIRV-Headers is not the requested revision' }
           # MSYS2 verifies the signed repository database and package signatures.  glslc and gendef are build-only.
-          & 'C:\msys64\usr\bin\bash.exe' -lc 'pacman -Sy --needed --noconfirm mingw-w64-ucrt-x86_64-shaderc mingw-w64-ucrt-x86_64-mingw-w64-tools'
+          & 'C:\msys64\usr\bin\bash.exe' -lc 'pacman -Sy --needed --noconfirm mingw-w64-ucrt-x86_64-shaderc mingw-w64-ucrt-x86_64-tools-git'
           if ($LASTEXITCODE -ne 0) { throw 'MSYS2 package verification or installation failed' }
           New-Item -ItemType Directory -Force -Path "$tools\msys\ucrt64" | Out-Null
           robocopy 'C:\msys64\ucrt64\bin' "$tools\msys\ucrt64\bin" /E /NFL /NDL /NJH /NJS
